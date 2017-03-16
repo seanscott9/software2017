@@ -1,3 +1,5 @@
+package db;
+
 import java.security.MessageDigest;
 
 public class hashpassword {
