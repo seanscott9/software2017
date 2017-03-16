@@ -1,4 +1,5 @@
 import java.awt.BorderLayout;
+import java.awt.CardLayout;
 import java.awt.Container;
 import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
@@ -11,7 +12,7 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.DefaultComboBoxModel;
 
-public class Calendar extends JFrame implements ActionListener{
+public class cal extends JFrame implements ActionListener{
 
 	static JPanel calPanel;
 	JButton homeButt;
@@ -19,8 +20,8 @@ public class Calendar extends JFrame implements ActionListener{
 	JButton logoutButt;
 	JButton makeBooking;
 	String[] dates ={"dates","will","be","here"};
-	private JComboBox comboBox;
-	public Calendar() {
+	JComboBox comboBox;
+	public cal() {
 		homeButt = new JButton("Home");
 		homeButt.addActionListener(this);
 		bannerLabel = new JLabel("Calendar");
@@ -44,7 +45,7 @@ public class Calendar extends JFrame implements ActionListener{
 		JPanel bookingPanel= new JPanel(); 
 		bookingPanel.add(makeBooking);
 		
-		calPanel = new JPanel();
+		calPanel = new JPanel(new CardLayout());
 		calPanel.setSize(500, 500);
 		calPanel.setVisible(false);
 		calPanel.setLayout(new BorderLayout());
@@ -57,6 +58,7 @@ public class Calendar extends JFrame implements ActionListener{
 		//calPanel.add(comboBox, BorderLayout.NORTH);
 		//calPanel.add(comboBox, BorderLayout.NORTH);
 		//calPanel.add();
+		
 	}
 	@Override
 	public void actionPerformed(ActionEvent e) {
