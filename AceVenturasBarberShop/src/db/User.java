@@ -1,6 +1,7 @@
+package db;
 /**
  * Ace Venturas Detective Agency
- * @author B00076316 Liam Walsh & B00091655 Se·n Scott
+ * @author B00076316 Liam Walsh & B00091655 Se√°n Scott
  *
  */
 public class User {
