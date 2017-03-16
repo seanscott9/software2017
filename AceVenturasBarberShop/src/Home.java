@@ -5,7 +5,7 @@ import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
-public class Home extends JPanel implements ActionListener{
+public class Home extends JPanel {
 	/**
 	 * 
 	 */
@@ -19,14 +19,13 @@ public class Home extends JPanel implements ActionListener{
 		JButton registrationButt;
 		JButton viewCalendar;
 		JButton loginButt;
-				
 				//main home frame
 				
 				//top panel for seats in use 
 				JPanel northPanel = new JPanel();
 				northPanel.setLayout(new FlowLayout());
 				//middle panel for logo
-				JPanel middlePanel = new JPanel();
+				JPanel middlePanel = new JPanel(); 
 				//left panel for buttons
 				JPanel westPanel = new JPanel();
 				westPanel.setLayout(new GridLayout(2,1));
@@ -41,7 +40,7 @@ public class Home extends JPanel implements ActionListener{
 				registrationButt.setPreferredSize(new Dimension(150, 25));
 				registrationButt.setMinimumSize(new Dimension(100, 20));
 				registrationButt.setMaximumSize(new Dimension(150, 20));
-				registrationButt.addActionListener(this);//actionlistener
+				//registrationButt.addActionListener();//actionlistener
 				viewCalendar = new JButton("View Calendar");
 				viewCalendar.setFont(new Font("Microsoft Sans Serif", Font.BOLD, 18));
 				viewCalendar.setBorder(new BevelBorder(BevelBorder.LOWERED, null, null, null, null));
@@ -103,10 +102,5 @@ public class Home extends JPanel implements ActionListener{
 
 	}
 
-	@Override
-	public void actionPerformed(ActionEvent e) {
-		// TODO Auto-generated method stub
-		
-	}
 
 }

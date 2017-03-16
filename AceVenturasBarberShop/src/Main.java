@@ -21,11 +21,20 @@ public class Main{
 	public Main(){
 	panel.setLayout(c1);
 	panel.add(g1, "1");//HOME SET AS 1
-	
 	frame.add(panel);
 	frame.pack();
 	frame.setVisible(true);
 	c1.show(panel, "1");//home displayed
+	
+	class actions implements ActionListener{
+		public void actionPerformed(ActionEvent e) {
+			Object source = e.getSource();
+				//if(source == ){
+					
+			}
+			
+		}
+		
 	}
 	
 	/**
@@ -36,5 +45,5 @@ public class Main{
 
 	}
 
-
+	
 }

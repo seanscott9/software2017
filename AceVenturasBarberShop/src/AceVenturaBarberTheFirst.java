@@ -49,22 +49,22 @@ public class AceVenturaBarberTheFirst extends JFrame implements ActionListener{
 			//buttons
 			timeSlotBookingButt = new JButton("Book a Timeslot");
 			
-			timeSlotBookingButt.addActionListener(this);
+			timeSlotBookingButt.addActionListener(this);////////TIME SLOT BUTTON
 			registrationButt = new JButton("Registration Form");
-			registrationButt.addActionListener(this);
+			registrationButt.addActionListener(this);/////////REGISTRATION BUTTON
 			viewCalendar = new JButton("ViewCalendar(placeholder)");
-			viewCalendar.addActionListener(this);
-			loginButt = new JButton("Login");
+			viewCalendar.addActionListener(this);////////VIEW CALENDAR BUT
+			loginButt = new JButton("Login");/////////LOGIN BUTT
 			loginButt.addActionListener(this);
 			
 			//seats in use placeholder
-			JLabel inUse0 = new JLabel(new ImageIcon("///E:/College/software/AceVenturasBarberShop/src/img/ace.jpg"));
-			JLabel inUse1 = new JLabel(new ImageIcon("///E:/College/software/AceVenturasBarberShop/src/img/ace.jpg"));
-			JLabel inUse2 = new JLabel(new ImageIcon("///E:/College/software/AceVenturasBarberShop/src/img/ace.jpg"));
+			JLabel inUse0 = new JLabel(new ImageIcon("src/img/ace.jpg"));
+			JLabel inUse1 = new JLabel(new ImageIcon("src/img/ace.jpg"));
+			JLabel inUse2 = new JLabel(new ImageIcon("src/img/ace.jpg"));
 			//JLabel inUse3 = new JLabel(new ImageIcon("///E:/College/software/AceVenturasBarberShop/src/img/ace.jpg"));
 			
 			//logo
-			JLabel logo = new JLabel(new ImageIcon("//E:/College/software/AceVenturasBarberShop/src/img/barber.jpeg"));
+			JLabel logo = new JLabel(new ImageIcon("src/img/barber.jpeg"));
 			
 			frame.setVisible(true);
 			frame.setSize(500, 500);
@@ -90,11 +90,11 @@ public class AceVenturaBarberTheFirst extends JFrame implements ActionListener{
 		/////////////////////////////////////////////////////////END OF HOME FRAME
 			
 		///START OF CALENDAR FRAME////////////////////////////////////////////////	
-			homeButt = new JButton("Home");
+			homeButt = new JButton("Home");//////HOME BUTT
 			homeButt.addActionListener(this);
-			bannerLabel = new JLabel("Calendar");
+			bannerLabel = new JLabel("Calendar");//////HOME BUTT
 			logoutButt = new JButton("Logout");
-			logoutButt.addActionListener(this);
+			logoutButt.addActionListener(this);//////LOGOUT
 			JPanel panelTop =new JPanel();
 			panelTop.setLayout(new GridLayout(1,3));
 			panelTop.add(homeButt);
@@ -150,14 +150,18 @@ public class AceVenturaBarberTheFirst extends JFrame implements ActionListener{
 			JLabel signUpLabel = new JLabel("Sign-Up");
 			//email, passwrod, phone optional
 			JPanel emailSignPanel = new JPanel();
+			JButton backHome = new JButton("HOME");////////HOME BUTTON
+			backHome.addActionListener(this);
 			JLabel emailLabel = new JLabel("E-Mail Address");
-			JTextField emailArea = new JTextField(25);
+			JTextField emailArea = new JTextField(25);//eamil field
 			JPanel passwrodSignUpPanel = new JPanel();
 			JLabel passwordsignUpLabel = new JLabel("Password");
-			JPasswordField passwordSignUpArea = new JPasswordField(25);
+			JPasswordField passwordSignUpArea = new JPasswordField(25);//pwd field
 			JPanel phoneSignUpPanel = new JPanel();
-			JLabel phoneLabel = new JLabel("Contact Numbers");
+			JLabel phoneLabel = new JLabel("Contact Numbers");//phone field
 			JTextField phoneTextField = new JTextField(25);
+			JButton submit = new JButton("Submit");//*********SUBMIT BUTTON HERE
+			submit.addActionListener(this);
 			
 			signUpBannerPanel.add(signUpLabel);
 			emailSignPanel.add(emailLabel, BorderLayout.PAGE_START);
@@ -176,7 +180,8 @@ public class AceVenturaBarberTheFirst extends JFrame implements ActionListener{
 			signupFrame.setSize(500, 500);
 			signupFrame.setVisible(false);
 			signupFrame.add(signUpBannerPanel, BorderLayout.PAGE_START);
-			signupFrame.add(signUpInputs);
+			signupFrame.add(signUpInputs, BorderLayout.CENTER);
+			signupFrame.add(submit, BorderLayout.PAGE_END);
 						
 	}
 	
