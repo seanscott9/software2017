@@ -1,3 +1,5 @@
+package db;
+
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.ResultSet;
@@ -9,7 +11,7 @@ import javax.swing.JOptionPane;
 
 /**
  * Ace Venturas Detective Agency
- * @author B00076316 Liam Walsh & B00091655 Se·n Scott
+ * @author B00076316 Liam Walsh & B00091655 Se√°n Scott
  *  
  */
 public class DBConnection {
