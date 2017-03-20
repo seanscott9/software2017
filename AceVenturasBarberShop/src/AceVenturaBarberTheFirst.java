@@ -3,8 +3,10 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 import javax.swing.*;
+import db.DBConnection;
+import db.User;
 /**
- * @author Se·n Scott, Liam Walsh
+ * @author Se√°n Scott, Liam Walsh
  * version 1.0 28/02/2017
  */
 public class AceVenturaBarberTheFirst extends JFrame implements ActionListener{
@@ -207,7 +209,13 @@ public class AceVenturaBarberTheFirst extends JFrame implements ActionListener{
 			frame.setVisible(false);
 			calFrame.setVisible(true);
 		}if(source == loginButt){
-			System.out.println("test login button");
+			System.out.println("Login: " + usrName.getText() + ", Password: " + pwd.getText());
+			User user = DBConnection.logIn(usrName.getText(), pwd.getText());
+			if(user != null) 
+			{
+				System.out.println("Login userID: " + user.getUserID());
+				DBConnection.setUser(user);
+			}
 			frame.setVisible(false);
 			loginFrame.setVisible(true);
 		}if(source == homeButt){
