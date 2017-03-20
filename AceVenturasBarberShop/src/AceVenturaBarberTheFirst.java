@@ -132,8 +132,16 @@ public class AceVenturaBarberTheFirst extends JFrame implements ActionListener{
 			JPanel pwdPanel = new JPanel();
 			JLabel pwdLabel = new JLabel("Password");
 			JTextField pwd = new JTextField(25);
+			JButton homeButton = new JButton("Home");/////////HOME BUTTON
+			homeButton.addActionListener(this);
+			JButton loginButt = new JButton("Login");/////////SUBMIT/LOGIN BUTTON
+			loginButt.addActionListener(this);
+			
+			JPanel loginPanel = new JPanel();
+			loginPanel.add(loginButt);
 			
 			LoginBannerPanel.add(loginBanner);
+			LoginBannerPanel.add(loginButt); 
 			usrnamePanel.add(usrNameLabel);
 			usrnamePanel.add(usrName);
 			pwdPanel.add(pwdLabel);
@@ -146,6 +154,7 @@ public class AceVenturaBarberTheFirst extends JFrame implements ActionListener{
 			loginFrame.setVisible(false);
 			loginFrame.add(LoginBannerPanel, BorderLayout.PAGE_START);
 			loginFrame.add(loginMiddlePanel,BorderLayout.CENTER);
+			loginFrame.add(loginPanel, BorderLayout.PAGE_END);
 			///////////////////////////////LOGIN GUI END
 			////////////////////////////////////////////SIGN UP GUI
 			JPanel signUpBannerPanel = new JPanel();
