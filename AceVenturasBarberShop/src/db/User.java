@@ -12,16 +12,12 @@ public class User {
 	private boolean checkedIn;
 	
 
+	public User(String email, String password, String phoneNum) {
+		this.email = email;
+		this.password = password;
+		this.phoneNum = phoneNum;
+	}
 	
-	/**
-	 * Constructs a booking with all information
-	 * @param bookingID Booking ID
-	 * @param roomID Room ID
-	 * @param startDate Start date
-	 * @param endDate End date
-	 * @param userID User ID
-	 * @param checkedIn Is checked in
-	 */
 	public User(int userID, String email, String phoneNum) {
 		this.userID = userID;
 		this.email = email;
