@@ -10,12 +10,18 @@ import db.User;
  * version 1.0 28/02/2017
  */
 public class AceVenturaBarberTheFirst extends JFrame implements ActionListener{
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	//home window buttons
 	JFrame frame;
 	JButton timeSlotBookingButt;
 	JButton registrationButt;
 	JButton viewCalendar;
+	JButton logButt;
 	JButton loginButt;
+	JButton signupButt;
 	//////////////////
 	//CALENDAR 
 	JFrame calFrame;
@@ -27,9 +33,16 @@ public class AceVenturaBarberTheFirst extends JFrame implements ActionListener{
 	//LOGIN
 	JFrame loginFrame;
 	JPanel loginMainPanel;
+	JTextField pwd;
+	JTextField usrName;
 	////////////////////
 	//SignUP
 	JFrame signupFrame;
+	JTextField phoneTextField;
+	JTextField emailArea;
+	JPasswordField passwordSignUpArea;
+	
+	
 	public AceVenturaBarberTheFirst(){
 		super("Barbershop");
 			//main home frame
@@ -56,8 +69,8 @@ public class AceVenturaBarberTheFirst extends JFrame implements ActionListener{
 			registrationButt.addActionListener(this);/////////REGISTRATION BUTTON
 			viewCalendar = new JButton("ViewCalendar(placeholder)");
 			viewCalendar.addActionListener(this);////////VIEW CALENDAR BUT
-			loginButt = new JButton("Login");/////////LOGIN BUTT
-			loginButt.addActionListener(this);
+			logButt = new JButton("Login");/////////LOGIN BUTT
+			logButt.addActionListener(this);
 			
 			//seats in use placeholder
 			JLabel inUse0 = new JLabel(new ImageIcon("src/img/ace.jpg"));
@@ -83,7 +96,7 @@ public class AceVenturaBarberTheFirst extends JFrame implements ActionListener{
 			westPanel.add(registrationButt);
 			//east
 			eastPanel.add(viewCalendar);
-			eastPanel.add(loginButt);
+			eastPanel.add(logButt);
 			
 			frame.add(northPanel, BorderLayout.PAGE_START);
 			frame.add(eastPanel, BorderLayout.LINE_START);
@@ -128,13 +141,13 @@ public class AceVenturaBarberTheFirst extends JFrame implements ActionListener{
 			JPanel loginMiddlePanel = new JPanel();//to arrange inputs
 			JPanel usrnamePanel = new JPanel();
 			JLabel usrNameLabel = new JLabel("Username");
-			JTextField usrName = new JTextField(25);
+			usrName = new JTextField(25);
 			JPanel pwdPanel = new JPanel();
 			JLabel pwdLabel = new JLabel("Password");
-			JTextField pwd = new JTextField(25);
+			pwd = new JTextField(25);
 			JButton homeButton = new JButton("Home");/////////HOME BUTTON
 			homeButton.addActionListener(this);
-			JButton loginButt = new JButton("Login");/////////SUBMIT/LOGIN BUTTON
+			loginButt = new JButton("Login");/////////SUBMIT/LOGIN BUTTON
 			loginButt.addActionListener(this);
 			
 			JPanel loginPanel = new JPanel();
@@ -164,15 +177,15 @@ public class AceVenturaBarberTheFirst extends JFrame implements ActionListener{
 			JButton backHome = new JButton("HOME");////////HOME BUTTON
 			backHome.addActionListener(this);
 			JLabel emailLabel = new JLabel("E-Mail Address");
-			JTextField emailArea = new JTextField(25);//eamil field
+			emailArea = new JTextField(25);//eamil field
 			JPanel passwrodSignUpPanel = new JPanel();
 			JLabel passwordsignUpLabel = new JLabel("Password");
-			JPasswordField passwordSignUpArea = new JPasswordField(25);//pwd field
+			passwordSignUpArea = new JPasswordField(25);//pwd field
 			JPanel phoneSignUpPanel = new JPanel();
 			JLabel phoneLabel = new JLabel("Contact Numbers");//phone field
-			JTextField phoneTextField = new JTextField(25);
-			JButton submit = new JButton("Submit");//*********SUBMIT BUTTON HERE
-			submit.addActionListener(this);
+			phoneTextField = new JTextField(25);
+			signupButt = new JButton("Submit");//*********SUBMIT BUTTON HERE
+			signupButt.addActionListener(this);
 			
 			signUpBannerPanel.add(signUpLabel);
 			emailSignPanel.add(emailLabel, BorderLayout.PAGE_START);
@@ -192,7 +205,7 @@ public class AceVenturaBarberTheFirst extends JFrame implements ActionListener{
 			signupFrame.setVisible(false);
 			signupFrame.add(signUpBannerPanel, BorderLayout.PAGE_START);
 			signupFrame.add(signUpInputs, BorderLayout.CENTER);
-			signupFrame.add(submit, BorderLayout.PAGE_END);
+			signupFrame.add(signupButt, BorderLayout.PAGE_END);
 						
 	}
 	
@@ -200,6 +213,7 @@ public class AceVenturaBarberTheFirst extends JFrame implements ActionListener{
 	/**
 	 * @param args
 	 */
+	@SuppressWarnings("unused")
 	public static void main(String[] args) {
 		AceVenturaBarberTheFirst frame = new AceVenturaBarberTheFirst();	
 	}
@@ -214,22 +228,31 @@ public class AceVenturaBarberTheFirst extends JFrame implements ActionListener{
 			System.out.println("Test registration button");
 			frame.setVisible(false);
 			signupFrame.setVisible(true);
+		}if(source == logButt){
+			frame.setVisible(false);
+			loginFrame.setVisible(true);
 		}if(source == viewCalendar){
 			frame.setVisible(false);
 			calFrame.setVisible(true);
 		}if(source == loginButt){
-			System.out.println("Login: " + usrName.getText() + ", Password: " + pwd.getText());
-			User user = DBConnection.logIn(usrName.getText(), pwd.getText());
-			if(user != null) 
-			{
-				System.out.println("Login userID: " + user.getUserID());
-				DBConnection.setUser(user);
-			}
-			frame.setVisible(false);
-			loginFrame.setVisible(true);
+				System.out.println("Login: " + usrName.getText() + ", Password: " + pwd.getText());
+				User user = DBConnection.logIn(usrName.getText(), pwd.getText());
+				if(user != null) 
+				{
+					System.out.println("Login userID: " + user.getUserID());
+					DBConnection.setUser(user);
+					frame.setVisible(true);
+					loginFrame.setVisible(false);
+				}	
 		}if(source == homeButt){
 			calFrame.setVisible(false);
 			frame.setVisible(true);
+		}if(source == signupButt){
+			System.out.println("Create Account: " + emailArea.getText() + ", Password: " + new String(passwordSignUpArea.getPassword()) + ", Phone Number: " + phoneTextField.getText());
+			User user = new User(emailArea.getText(), new String(passwordSignUpArea.getPassword()), phoneTextField.getText());
+			DBConnection.setUser(user);
+			DBConnection.insertUser(user);
+			
 		}
 		
 	}
