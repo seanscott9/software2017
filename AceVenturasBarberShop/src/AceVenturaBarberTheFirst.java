@@ -6,15 +6,18 @@ import javax.swing.*;
 import db.DBConnection;
 import db.User;
 /**
+ * Ace Ventura's Detective Agency
  * @author Seán Scott, Liam Walsh
  * version 1.0 28/02/2017
  */
 public class AceVenturaBarberTheFirst extends JFrame implements ActionListener{
 	/**
-	 * 
+	 * Main Class
 	 */
 	private static final long serialVersionUID = 1L;
-	//home window buttons
+	/**
+	 * Home window Frame and Buttons
+	 */
 	JFrame frame;
 	JButton timeSlotBookingButt;
 	JButton registrationButt;
@@ -22,21 +25,24 @@ public class AceVenturaBarberTheFirst extends JFrame implements ActionListener{
 	JButton logButt;
 	JButton loginButt;
 	JButton signupButt;
-	//////////////////
-	//CALENDAR 
+	/**
+	 * Calendar Frame and Buttons
+	 */
 	JFrame calFrame;
 	JButton homeButt;
 	JLabel bannerLabel;
 	JButton logoutButt;
 	JButton makeBooking;
-	////////////////////
-	//LOGIN
+	/**
+	 * Login Frame and Buttons
+	 */
 	JFrame loginFrame;
 	JPanel loginMainPanel;
 	JTextField pwd;
 	JTextField usrName;
-	////////////////////
-	//SignUP
+	/**
+	 * Signup Frame and Buttons
+	 */
 	JFrame signupFrame;
 	JTextField phoneTextField;
 	JTextField emailArea;
@@ -45,56 +51,95 @@ public class AceVenturaBarberTheFirst extends JFrame implements ActionListener{
 	
 	public AceVenturaBarberTheFirst(){
 		super("Barbershop");
-			//main home frame
+			/**
+			 * Main frame
+			 */
 			frame = new JFrame();
-			//top panel for seats in use 
+			/**
+			 * Top panel for seats in use (NYI)
+			 */
 			JPanel northPanel = new JPanel();
 			northPanel.setLayout(new FlowLayout());
-			//middle panel for logo
+			/**
+			 * Middle Panel for Logo
+			 */
 			JPanel middlePanel = new JPanel();
-			//left panel for buttons
+			/**
+			 * Left Panel for Buttons
+			 */
 			JPanel westPanel = new JPanel();
 			westPanel.setLayout(new GridLayout(2,1));
-			//right panel
+			/**
+			 * Right Panel
+			 */
 			JPanel eastPanel = new JPanel();
 			eastPanel.setLayout(new GridLayout(2,1));
 			
 			
+			/**
+			 * Buttons
+			 */
 			
-			//buttons
+			/**
+			 * TimeSlot Button
+			 */
 			timeSlotBookingButt = new JButton("Book a Timeslot");
-			
-			timeSlotBookingButt.addActionListener(this);////////TIME SLOT BUTTON
+			timeSlotBookingButt.addActionListener(this);
+			/**
+			 * Registration Button
+			 */
 			registrationButt = new JButton("Registration Form");
-			registrationButt.addActionListener(this);/////////REGISTRATION BUTTON
+			registrationButt.addActionListener(this);
+			/**
+			 * Calendar Button
+			 */
 			viewCalendar = new JButton("ViewCalendar(placeholder)");
-			viewCalendar.addActionListener(this);////////VIEW CALENDAR BUT
-			logButt = new JButton("Login");/////////LOGIN BUTT
+			viewCalendar.addActionListener(this);
+			/**
+			 * Login Button
+			 */
+			logButt = new JButton("Login");
 			logButt.addActionListener(this);
 			
-			//seats in use placeholder
+			/**
+			 * Seats in user(NYI) placeholder
+			 */
 			JLabel inUse0 = new JLabel(new ImageIcon("src/img/ace.jpg"));
 			JLabel inUse1 = new JLabel(new ImageIcon("src/img/ace.jpg"));
 			JLabel inUse2 = new JLabel(new ImageIcon("src/img/ace.jpg"));
 			//JLabel inUse3 = new JLabel(new ImageIcon("///E:/College/software/AceVenturasBarberShop/src/img/ace.jpg"));
 			
-			//logo
+			/**
+			 * Logo
+			 */
 			JLabel logo = new JLabel(new ImageIcon("src/img/barber.jpeg"));
 			
+			/**
+			 * Setting main frame as Visible
+			 * and Size
+			 */
 			frame.setVisible(true);
 			frame.setSize(500, 500);
-			//north
+			/**
+			 * North Panel
+			 */
 			northPanel.add(inUse0);
 			northPanel.add(inUse1);
 			northPanel.add(inUse2);
 			//northPanel.add(inUse3);
 			
-			//middle
+			/**
+			 * Middle Panel
+			 */
 			middlePanel.add(logo);
-			//west
+			/**
+			 * West Panel
+			 */
 			westPanel.add(timeSlotBookingButt);
 			westPanel.add(registrationButt);
-			//east
+			/**
+			 * East Panel
+			 */
 			eastPanel.add(viewCalendar);
 			eastPanel.add(logButt);
 			
@@ -102,14 +147,24 @@ public class AceVenturaBarberTheFirst extends JFrame implements ActionListener{
 			frame.add(eastPanel, BorderLayout.LINE_START);
 			frame.add(westPanel, BorderLayout.LINE_END);
 			frame.add(middlePanel, BorderLayout.CENTER);
-		/////////////////////////////////////////////////////////END OF HOME FRAME
+		/**
+		 * END OF MAIN FRAME
+		 */
 			
-		///START OF CALENDAR FRAME////////////////////////////////////////////////	
-			homeButt = new JButton("Home");//////HOME BUTT
+		/**
+		 * START OF CALENDAR FRAME	
+		 */
+			/**
+			 * Home Button
+			 */
+			homeButt = new JButton("Home");
 			homeButt.addActionListener(this);
-			bannerLabel = new JLabel("Calendar");//////HOME BUTT
+			/**
+			 * Logout Button
+			 */
+			bannerLabel = new JLabel("Calendar");
 			logoutButt = new JButton("Logout");
-			logoutButt.addActionListener(this);//////LOGOUT
+			logoutButt.addActionListener(this);
 			JPanel panelTop =new JPanel();
 			panelTop.setLayout(new GridLayout(1,3));
 			panelTop.add(homeButt);
@@ -134,20 +189,36 @@ public class AceVenturaBarberTheFirst extends JFrame implements ActionListener{
 			calFrame.add(panelTop, BorderLayout.PAGE_START);
 			calFrame.add(middle, BorderLayout.CENTER);
 			calFrame.add(bookingPanel, BorderLayout.PAGE_END);
-		////////////////////////////////////////////////////////END OF CALENDAR
-		////////LOGIN GUI
+		/**
+		 * END OF CALENDAR FRAME
+		 */
+		/**
+		 * START OF LOGIN FRAME
+		 */
+			/**
+			 * To arrange Layout
+			 */
 			JPanel LoginBannerPanel = new JPanel();
 			JLabel loginBanner = new JLabel("Login");
-			JPanel loginMiddlePanel = new JPanel();//to arrange inputs
+			JPanel loginMiddlePanel = new JPanel();
 			JPanel usrnamePanel = new JPanel();
+			/**
+			 * Adding Components to the Panel
+			 */
 			JLabel usrNameLabel = new JLabel("Username");
 			usrName = new JTextField(25);
 			JPanel pwdPanel = new JPanel();
 			JLabel pwdLabel = new JLabel("Password");
 			pwd = new JTextField(25);
-			JButton homeButton = new JButton("Home");/////////HOME BUTTON
+			/**
+			 * Home Button
+			 */
+			JButton homeButton = new JButton("Home");
 			homeButton.addActionListener(this);
-			loginButt = new JButton("Login");/////////SUBMIT/LOGIN BUTTON
+			/**
+			 * Login Button
+			 */
+			loginButt = new JButton("Login");
 			loginButt.addActionListener(this);
 			
 			JPanel loginPanel = new JPanel();
@@ -168,23 +239,43 @@ public class AceVenturaBarberTheFirst extends JFrame implements ActionListener{
 			loginFrame.add(LoginBannerPanel, BorderLayout.PAGE_START);
 			loginFrame.add(loginMiddlePanel,BorderLayout.CENTER);
 			loginFrame.add(loginPanel, BorderLayout.PAGE_END);
-			///////////////////////////////LOGIN GUI END
-			////////////////////////////////////////////SIGN UP GUI
+		/**
+		* END OF LOGIN FRAME
+		*/
+		
+		/**
+		 * START OF SIGNUP FRAME
+		 */
 			JPanel signUpBannerPanel = new JPanel();
 			JLabel signUpLabel = new JLabel("Sign-Up");
-			//email, passwrod, phone optional
+			
 			JPanel emailSignPanel = new JPanel();
-			JButton backHome = new JButton("HOME");////////HOME BUTTON
+			/**
+			 * Home Button
+			 */
+			JButton backHome = new JButton("HOME");
 			backHome.addActionListener(this);
+			/**
+			 * Email Field
+			 */
 			JLabel emailLabel = new JLabel("E-Mail Address");
-			emailArea = new JTextField(25);//eamil field
+			emailArea = new JTextField(25);
+			/**
+			 * Password Field
+			 */
 			JPanel passwrodSignUpPanel = new JPanel();
 			JLabel passwordsignUpLabel = new JLabel("Password");
-			passwordSignUpArea = new JPasswordField(25);//pwd field
+			passwordSignUpArea = new JPasswordField(25);
+			/**
+			 * Phone Number Field
+			 */
 			JPanel phoneSignUpPanel = new JPanel();
-			JLabel phoneLabel = new JLabel("Contact Numbers");//phone field
+			JLabel phoneLabel = new JLabel("Contact Numbers");
 			phoneTextField = new JTextField(25);
-			signupButt = new JButton("Submit");//*********SUBMIT BUTTON HERE
+			/**
+			 * Submit Button
+			 */
+			signupButt = new JButton("Submit");
 			signupButt.addActionListener(this);
 			
 			signUpBannerPanel.add(signUpLabel);
@@ -206,11 +297,15 @@ public class AceVenturaBarberTheFirst extends JFrame implements ActionListener{
 			signupFrame.add(signUpBannerPanel, BorderLayout.PAGE_START);
 			signupFrame.add(signUpInputs, BorderLayout.CENTER);
 			signupFrame.add(signupButt, BorderLayout.PAGE_END);
+		/**
+		 * END OF SIGNUP FRAME
+		 */
 						
 	}
 	
 
 	/**
+	 * Main Class
 	 * @param args
 	 */
 	@SuppressWarnings("unused")
@@ -221,40 +316,93 @@ public class AceVenturaBarberTheFirst extends JFrame implements ActionListener{
 
 	@Override
 	public void actionPerformed(ActionEvent e) {
+		/**
+		 * Get source of ActionListener
+		 */
 		Object source = e.getSource();
+		/**
+		 * TimeSlot Panel Button Action
+		 */
 		if(source==timeSlotBookingButt){
 			System.out.println("Test booking button");
-		}if(source == registrationButt){
+		}
+		/**
+		 * Registration Panel Button Action
+		 */
+		if(source == registrationButt){
 			System.out.println("Test registration button");
+			/**
+			 * Changes the visible frame
+			 */
 			frame.setVisible(false);
 			signupFrame.setVisible(true);
-		}if(source == logButt){
+		}
+		/**
+		 * Login Panel Button Action
+		 */
+		if(source == logButt){
+			/**
+			 * Changes the visible frame
+			 */
 			frame.setVisible(false);
 			loginFrame.setVisible(true);
-		}if(source == viewCalendar){
+		}
+		/**
+		 * Calendar Panel Button Action
+		 */
+		if(source == viewCalendar){
+			/**
+			 * Change the visible frame
+			 */
 			frame.setVisible(false);
 			calFrame.setVisible(true);
-		}if(source == loginButt){
-				System.out.println("Login: " + usrName.getText() + ", Password: " + pwd.getText());
-				User user = DBConnection.logIn(usrName.getText(), pwd.getText());
-				if(user != null) 
-				{
-					System.out.println("Login userID: " + user.getUserID());
-					DBConnection.setUser(user);
-					frame.setVisible(true);
-					loginFrame.setVisible(false);
-				}	
-		}if(source == homeButt){
+		}
+		/**
+		 * Login Button Action
+		 */
+		if(source == loginButt){
+			/**
+			 * Calls the DBConnection LogIn and passes the varibles
+			 */
+			System.out.println("Login: " + usrName.getText() + ", Password: " + pwd.getText());
+			User user = DBConnection.logIn(usrName.getText(), pwd.getText());
+			if(user != null) 
+			{
+				System.out.println("Login userID: " + user.getUserID());
+				DBConnection.setUser(user);
+				frame.setVisible(true);
+				loginFrame.setVisible(false);
+			}	
+		}
+		/**
+		 * Home Button Action
+		 */
+		if(source == homeButt){
+			/**
+			 * Change the visible frame
+			 */
 			calFrame.setVisible(false);
 			frame.setVisible(true);
-		}if(source == signupButt){
+		}
+		/**
+		 * Signup Button Action
+		 */
+		if(source == signupButt){
+			/**
+			 * Calls the setUser and insertUser and passes the parameters
+			 */
 			System.out.println("Create Account: " + emailArea.getText() + ", Password: " + new String(passwordSignUpArea.getPassword()) + ", Phone Number: " + phoneTextField.getText());
 			User user = new User(emailArea.getText(), new String(passwordSignUpArea.getPassword()), phoneTextField.getText());
 			DBConnection.setUser(user);
 			DBConnection.insertUser(user);
 			
 		}
-		
+		/**
+		 * END OF ACTIONLISTENERS
+		 */
 	}
+/**
+ * END OF PROGRAM
+ */
 
 }
