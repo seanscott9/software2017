@@ -10,32 +10,47 @@ import javax.swing.JOptionPane;
 
 
 /**
- * Ace Venturas Detective Agency
+ * Ace Ventura's Detective Agency
  * @author B00076316 Liam Walsh & B00091655 Seán Scott
  *  
  */
 public class DBConnection {
-	
+	/**
+	 * Creating instances of the 
+	 * User, Booking and Connection
+	 */
 	public static Connection connection;
 	public static Booking booking;
 	public static User user;
 	
-	
+	/**
+	 * 
+	 * @return booking
+	 */
 	public static Booking getBooking() {
 		return booking;
 	}
 	
-	
+	/**
+	 * 
+	 * @param booking set
+	 */
 	public static void setBooking(Booking booking) {
 		DBConnection.booking = booking;
 	}
 	
-	
+	/**
+	 * 
+	 * @return user
+	 */
 	public static User getUser() {
 		return user;
 	}
 
-	
+	/**
+	 * 
+	 * @param user set
+	 */
 	public static void setUser(User user) {
 		DBConnection.user = user;
 	}
@@ -46,14 +61,18 @@ public class DBConnection {
 	 */
 	private static void getConnection() {
 		try{
-			//Register the Driver
+			/**
+			 * Register the Driver
+			 */
 			Class.forName("com.mysql.jdbc.Driver");
-			//Get a connection to the database
+			/**
+			 * Get a connection to the database
+			 */
 			connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/barber","root", "root");
 			System.out.println("Database connection successful.");
 		}
 		catch(Exception e){
-			// something went wrong with DB connection
+			
 			System.out.println("Database Connection Error!");
 			e.printStackTrace();
 		}
@@ -76,21 +95,33 @@ public class DBConnection {
 	}
 	
 	
-	
-	public static User logIn(String email, String password) {
+	/**
+	 * Gets the data from the InputFields
+	 * @param usr
+	 * @param pwd
+	 * @return usr
+	 */
+	public static User logIn(String usr, String pwd) {
 		User user = null;
+		/**
+		 * Calls the Connection Class
+		 */
 		getConnection();
 		try {
+			/**
+			 * The SELECT SQL Statement
+			 */
 			Statement statement = connection.createStatement();
-			String query = "SELECT * FROM user WHERE email='" + email + "' AND password='" + password + "';";
+			String query = "SELECT * FROM users WHERE email='" + usr + "' AND password='" + pwd + "';";
 			System.out.println("[SQL QUERY] " + query);
 			ResultSet resultSet = statement.executeQuery(query);
 			if(resultSet.next()) {
 				System.out.println("User record found");
-				System.out.println("ID: " + resultSet.getInt("userid"));
-				user = new User(resultSet.getInt("userID"), resultSet.getString("email"), resultSet.getString("phoneNum"));
+				System.out.println("ID: " + resultSet.getInt("id"));
+				user = new User(resultSet.getInt("id"), resultSet.getString("email"), resultSet.getString("phoneNumber"));
 				DBConnection.setUser(user);
 				System.out.println("Hello " + user.getEmail() + " Welcome to Ace Ventura's Barber Shop!");
+				JOptionPane.showMessageDialog(null, "Welcome: " + user.getEmail(), "Login Sucessful", JOptionPane.INFORMATION_MESSAGE);
 			}
 			else {
 				System.out.println("User email or password incorrect");
@@ -105,11 +136,19 @@ public class DBConnection {
 		return user;
 	}
 	
+	/**
+	 * Checks if user is the Admin
+	 * @param user
+	 * @return
+	 */
 	public static boolean isAdmin(User user) {
 		boolean isAdmin = false;
 		
 		getConnection();
 		try {
+			/**
+			 * SELECT SQL to get admin
+			 */
 			Statement statement = connection.createStatement();
 			String query = "SELECT * FROM admin WHERE email='" + user.getEmail() + "';";
 			System.out.println("[SQL QUERY] " + query);
@@ -133,16 +172,20 @@ public class DBConnection {
 	}
 
 
-
+	/**
+	 * Inserts user into the Database
+	 * @param user
+	 */
 	public static void insertUser(User user) {
 		getConnection();
 		try {
 			Statement statement = connection.createStatement();
-			String query = "INSERT INTO user(email, password, phoneNum) VALUES (";
-			query = query + "'" + user.getEmail() + "','" + user.getPassword() + user.getPhoneNum() + "');";
+			String query = "INSERT INTO users(email, password, phoneNumber) VALUES (";
+			query = query + "'" + user.getEmail() + "','" + user.getPassword() +"','" + user.getPhoneNum() + "');";
 			System.out.println("[SQL QUERY] " + query);
 			statement.executeUpdate(query);
 			System.out.println("User added");
+			JOptionPane.showMessageDialog(null, "Welcome: " + user.getEmail(), "Account Creation Sucessful", JOptionPane.INFORMATION_MESSAGE);
 		}
 		catch(Exception e){
 			System.out.println("Error executing INSERT statement");
@@ -151,13 +194,16 @@ public class DBConnection {
 		closeConnection();
 	}
 	
+	/**
+	 * Deletes User from Database
+	 * @param user
+	 */
 	public static void deleteUser(User user){
 		getConnection();
 		try{
-			// Create a statement object
 			Statement statement = connection.createStatement();
-			//Execute a Query
-			String query = "DELETE FROM user WHERE userID ='" + user.getUserID() + "';";
+			
+			String query = "DELETE FROM users WHERE userID ='" + user.getUserID() + "';";
 			System.out.println("[SQL QUERY] " + query);
 			statement.executeUpdate(query);
 			statement.close();
@@ -169,7 +215,11 @@ public class DBConnection {
 		}
 		closeConnection();
 	}
-	
+	/**
+	 * Inserts booking into the database
+	 * @param booking
+	 * @param user
+	 */
 	public static void insertBooking(Booking booking, User user) {
 		
 			getConnection();
@@ -188,6 +238,11 @@ public class DBConnection {
 			closeConnection();
 		}
 	
+	/**
+	 * Deletes Bookings from the database
+	 * @param booking
+	 * @param user
+	 */
 	public static void deleteBooking(Booking booking, User user){
 		getConnection();
 		try{
