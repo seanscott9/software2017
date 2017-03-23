@@ -5,6 +5,9 @@ package db;
  *
  */
 public class User {
+	/**
+	 * Sets up Varibles
+	 */
 	private int userID;
 	private String email;
 	private String password;
@@ -25,68 +28,75 @@ public class User {
 	}
 	
 	/**
-	 * @return the checkedIn
+	 * @return checkedIn
 	 */
 	public boolean isCheckedIn() {
 		return checkedIn;
 	}
 
 	/**
-	 * @param checkedIn the checkedIn to set
+	 * @param checkedIn set
 	 */
 	public void setCheckedIn(boolean checkedIn) {
 		this.checkedIn = checkedIn;
 	}
 
-	
+	/**
+	 * @return userID
+	 */
 	public int getUserID() {
 		return userID;
 	}
 
-	
+	/**
+	 * @param userID set
+	 */
 	public void setUserID(int userID) {
 		this.userID = userID;
 	}
 
-	
+	/**
+	 * @return email
+	 */
 	public String getEmail() {
 		return email;
 	}
 
 	/**
-	 * @param roomID the roomID to set
+	 * @param email set
 	 */
 	public void setEmail(String email) {
 		this.email = email;
 	}
 
 	/**
-	 * @return the startDate
+	 * @return password
 	 */
 	public String getPassword() {
 		return password;
 	}
 
 	/**
-	 * @param startDate the startDate to set
+	 * @param password set
 	 */
 	public void setPassword(String password) {
 		this.password = password;
 	}
 
 	/**
-	 * @return the endDate
+	 * @return phoneNum
 	 */
 	public String getPhoneNum() {
 		return phoneNum;
 	}
 
 	/**
-	 * @param endDate the endDate to set
+	 * @param phoneNum set
 	 */
 	public void setPhoneNum(String phoneNum) {
 		this.phoneNum = phoneNum;
 	}
 
 }
+
 
