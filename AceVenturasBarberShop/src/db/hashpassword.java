@@ -1,7 +1,11 @@
 package db;
 
 import java.security.MessageDigest;
-
+/**
+ * Class for hashing the passwords (NYI)
+ * @author Liam Walsh & Seán Scott
+ *
+ */
 public class hashpassword {
 	
 	public static void main(String[] args)throws Exception
