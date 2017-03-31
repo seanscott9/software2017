@@ -47,262 +47,356 @@ public class AceVenturaBarberTheFirst extends JFrame implements ActionListener{
 	JTextField phoneTextField;
 	JTextField emailArea;
 	JPasswordField passwordSignUpArea;
-	
-	
+
+
 	public AceVenturaBarberTheFirst(){
 		super("Barbershop");
-			/**
-			 * Main frame
-			 */
-			frame = new JFrame();
-			/**
-			 * Top panel for seats in use (NYI)
-			 */
-			JPanel northPanel = new JPanel();
-			northPanel.setLayout(new FlowLayout());
-			/**
-			 * Middle Panel for Logo
-			 */
-			JPanel middlePanel = new JPanel();
-			/**
-			 * Left Panel for Buttons
-			 */
-			JPanel westPanel = new JPanel();
-			westPanel.setLayout(new GridLayout(2,1));
-			/**
-			 * Right Panel
-			 */
-			JPanel eastPanel = new JPanel();
-			eastPanel.setLayout(new GridLayout(2,1));
-			
-			
-			/**
-			 * Buttons
-			 */
-			
-			/**
-			 * TimeSlot Button
-			 */
-			timeSlotBookingButt = new JButton("Book a Timeslot");
-			timeSlotBookingButt.addActionListener(this);
-			/**
-			 * Registration Button
-			 */
-			registrationButt = new JButton("Registration Form");
-			registrationButt.addActionListener(this);
-			/**
-			 * Calendar Button
-			 */
-			viewCalendar = new JButton("ViewCalendar(placeholder)");
-			viewCalendar.addActionListener(this);
-			/**
-			 * Login Button
-			 */
-			logButt = new JButton("Login");
-			logButt.addActionListener(this);
-			
-			/**
-			 * Seats in user(NYI) placeholder
-			 */
-			JLabel inUse0 = new JLabel(new ImageIcon("src/img/ace.jpg"));
-			JLabel inUse1 = new JLabel(new ImageIcon("src/img/ace.jpg"));
-			JLabel inUse2 = new JLabel(new ImageIcon("src/img/ace.jpg"));
-			//JLabel inUse3 = new JLabel(new ImageIcon("///E:/College/software/AceVenturasBarberShop/src/img/ace.jpg"));
-			
-			/**
-			 * Logo
-			 */
-			JLabel logo = new JLabel(new ImageIcon("src/img/barber.jpeg"));
-			
-			/**
-			 * Setting main frame as Visible
-			 * and Size
-			 */
-			frame.setVisible(true);
-			frame.setSize(500, 500);
-			/**
-			 * North Panel
-			 */
-			northPanel.add(inUse0);
-			northPanel.add(inUse1);
-			northPanel.add(inUse2);
-			//northPanel.add(inUse3);
-			
-			/**
-			 * Middle Panel
-			 */
-			middlePanel.add(logo);
-			/**
-			 * West Panel
-			 */
-			westPanel.add(timeSlotBookingButt);
-			westPanel.add(registrationButt);
-			/**
-			 * East Panel
-			 */
-			eastPanel.add(viewCalendar);
-			eastPanel.add(logButt);
-			
-			frame.add(northPanel, BorderLayout.PAGE_START);
-			frame.add(eastPanel, BorderLayout.LINE_START);
-			frame.add(westPanel, BorderLayout.LINE_END);
-			frame.add(middlePanel, BorderLayout.CENTER);
+		/**
+		 * Main frame
+		 */
+		frame = new JFrame();
+		/**
+		 * Top panel for seats in use (NYI)
+		 */
+		JPanel northPanel = new JPanel();
+		northPanel.setLayout(new FlowLayout());
+		/**
+		 * Middle Panel for Logo
+		 */
+		JPanel middlePanel = new JPanel();
+		/**
+		 * Left Panel for Buttons
+		 */
+		JPanel westPanel = new JPanel();
+		westPanel.setLayout(new GridLayout(2,1));
+		/**
+		 * Right Panel
+		 */
+		JPanel eastPanel = new JPanel();
+		eastPanel.setLayout(new GridLayout(2,1));
+
+
+		/**
+		 * Buttons
+		 */
+
+		/**
+		 * TimeSlot Button
+		 */
+		timeSlotBookingButt = new JButton("Book a Timeslot");
+		timeSlotBookingButt.addActionListener(this);
+		/**
+		 * Registration Button
+		 */
+		registrationButt = new JButton("Registration Form");
+		registrationButt.addActionListener(this);
+		/**
+		 * Calendar Button
+		 */
+		viewCalendar = new JButton("ViewCalendar(placeholder)");
+		viewCalendar.addActionListener(this);
+		/**
+		 * Login Button
+		 */
+		logButt = new JButton("Login");
+		logButt.addActionListener(this);
+
+		/**
+		 * Seats in user(NYI) placeholder
+		 */
+		JLabel inUse0 = new JLabel(new ImageIcon("src/img/ace.jpg"));
+		JLabel inUse1 = new JLabel(new ImageIcon("src/img/ace.jpg"));
+		JLabel inUse2 = new JLabel(new ImageIcon("src/img/ace.jpg"));
+		//JLabel inUse3 = new JLabel(new ImageIcon("///E:/College/software/AceVenturasBarberShop/src/img/ace.jpg"));
+
+		/**
+		 * Logo
+		 */
+		JLabel logo = new JLabel(new ImageIcon("src/img/barber.jpeg"));
+
+		/**
+		 * Setting main frame as Visible
+		 * and Size
+		 */
+		frame.setVisible(true);
+		frame.setSize(500, 500);
+		/**
+		 * North Panel
+		 */
+		northPanel.add(inUse0);
+		northPanel.add(inUse1);
+		northPanel.add(inUse2);
+		//northPanel.add(inUse3);
+
+		/**
+		 * Middle Panel
+		 */
+		middlePanel.add(logo);
+		/**
+		 * West Panel
+		 */
+		westPanel.add(timeSlotBookingButt);
+		westPanel.add(registrationButt);
+		/**
+		 * East Panel
+		 */
+		eastPanel.add(viewCalendar);
+		eastPanel.add(logButt);
+
+		frame.add(northPanel, BorderLayout.PAGE_START);
+		frame.add(eastPanel, BorderLayout.LINE_START);
+		frame.add(westPanel, BorderLayout.LINE_END);
+		frame.add(middlePanel, BorderLayout.CENTER);
 		/**
 		 * END OF MAIN FRAME
 		 */
-			
+
 		/**
 		 * START OF CALENDAR FRAME	
 		 */
-			/**
-			 * Home Button
-			 */
-			homeButt = new JButton("Home");
-			homeButt.addActionListener(this);
-			/**
-			 * Logout Button
-			 */
-			bannerLabel = new JLabel("Calendar");
-			logoutButt = new JButton("Logout");
-			logoutButt.addActionListener(this);
-			JPanel panelTop =new JPanel();
-			panelTop.setLayout(new GridLayout(1,3));
-			panelTop.add(homeButt);
-			panelTop.add(bannerLabel);
-			panelTop.add(logoutButt);
-			
-			String[] dates ={"dates","will","be","here"};
-			
-			JComboBox<String> datesDropDown = new JComboBox<String>(dates);
-			JPanel middle = new JPanel();
-			middle.add(datesDropDown);
-			
-			
-			makeBooking = new JButton("Make Booking");
-			makeBooking.addActionListener(this);
-			JPanel bookingPanel= new JPanel(); 
-			bookingPanel.add(makeBooking);
-			
-			calFrame = new JFrame();
-			calFrame.setSize(500, 500);
-			calFrame.setVisible(false);
-			calFrame.add(panelTop, BorderLayout.PAGE_START);
-			calFrame.add(middle, BorderLayout.CENTER);
-			calFrame.add(bookingPanel, BorderLayout.PAGE_END);
+		/**
+		 * Home Button
+		 */
+		homeButt = new JButton("Home");
+		homeButt.addActionListener(this);
+		/**
+		 * Logout Button
+		 */
+		bannerLabel = new JLabel("Calendar");
+		logoutButt = new JButton("Logout");
+		logoutButt.addActionListener(this);
+		JPanel panelTop =new JPanel();
+		panelTop.setLayout(new GridLayout(1,3));
+		panelTop.add(homeButt);
+		panelTop.add(bannerLabel);
+		panelTop.add(logoutButt);
+
+		String[] dates ={"dates","will","be","here"};
+
+		JComboBox<String> datesDropDown = new JComboBox<String>(dates);
+		JPanel middle = new JPanel();
+		middle.add(datesDropDown);
+
+
+		makeBooking = new JButton("Make Booking");
+		makeBooking.addActionListener(this);
+		JPanel bookingPanel= new JPanel(); 
+		bookingPanel.add(makeBooking);
+
+		calFrame = new JFrame();
+		calFrame.setSize(500, 500);
+		calFrame.setVisible(false);
+		calFrame.add(panelTop, BorderLayout.PAGE_START);
+		calFrame.add(middle, BorderLayout.CENTER);
+		calFrame.add(bookingPanel, BorderLayout.PAGE_END);
 		/**
 		 * END OF CALENDAR FRAME
 		 */
 		/**
 		 * START OF LOGIN FRAME
 		 */
-			/**
-			 * To arrange Layout
-			 */
-			JPanel LoginBannerPanel = new JPanel();
-			JLabel loginBanner = new JLabel("Login");
-			JPanel loginMiddlePanel = new JPanel();
-			JPanel usrnamePanel = new JPanel();
-			/**
-			 * Adding Components to the Panel
-			 */
-			JLabel usrNameLabel = new JLabel("Username");
-			usrName = new JTextField(25);
-			JPanel pwdPanel = new JPanel();
-			JLabel pwdLabel = new JLabel("Password");
-			pwd = new JTextField(25);
-			/**
-			 * Home Button
-			 */
-			JButton homeButton = new JButton("Home");
-			homeButton.addActionListener(this);
-			/**
-			 * Login Button
-			 */
-			loginButt = new JButton("Login");
-			loginButt.addActionListener(this);
-			
-			JPanel loginPanel = new JPanel();
-			loginPanel.add(loginButt);
-			
-			LoginBannerPanel.add(loginBanner);
-			LoginBannerPanel.add(loginButt); 
-			usrnamePanel.add(usrNameLabel);
-			usrnamePanel.add(usrName);
-			pwdPanel.add(pwdLabel);
-			pwdPanel.add(pwd);
-			loginMiddlePanel.add(usrnamePanel, BorderLayout.PAGE_START);//to arrange inputs
-			loginMiddlePanel.add(pwdPanel, BorderLayout.PAGE_START);
-			
-			loginFrame = new JFrame();
-			loginFrame.setSize(500, 500);
-			loginFrame.setVisible(false);
-			loginFrame.add(LoginBannerPanel, BorderLayout.PAGE_START);
-			loginFrame.add(loginMiddlePanel,BorderLayout.CENTER);
-			loginFrame.add(loginPanel, BorderLayout.PAGE_END);
 		/**
-		* END OF LOGIN FRAME
-		*/
-		
+		 * To arrange Layout
+		 */
+		JPanel LoginBannerPanel = new JPanel();
+		JLabel loginBanner = new JLabel("Login");
+		JPanel loginMiddlePanel = new JPanel();
+		JPanel usrnamePanel = new JPanel();
+		/**
+		 * Adding Components to the Panel
+		 */
+		JLabel usrNameLabel = new JLabel("Username");
+		usrName = new JTextField(25);
+		JPanel pwdPanel = new JPanel();
+		JLabel pwdLabel = new JLabel("Password");
+		pwd = new JTextField(25);
+		/**
+		 * Home Button
+		 */
+		JButton homeButton = new JButton("Home");
+		homeButton.addActionListener(this);
+		/**
+		 * Login Button
+		 */
+		loginButt = new JButton("Login");
+		loginButt.addActionListener(this);
+
+		JPanel loginPanel = new JPanel();
+		loginPanel.add(loginButt);
+
+		LoginBannerPanel.add(loginBanner);
+		LoginBannerPanel.add(loginButt); 
+		usrnamePanel.add(usrNameLabel);
+		usrnamePanel.add(usrName);
+		pwdPanel.add(pwdLabel);
+		pwdPanel.add(pwd);
+		loginMiddlePanel.add(usrnamePanel, BorderLayout.PAGE_START);//to arrange inputs
+		loginMiddlePanel.add(pwdPanel, BorderLayout.PAGE_START);
+
+		loginFrame = new JFrame();
+		loginFrame.setSize(500, 500);
+		loginFrame.setVisible(false);
+		loginFrame.add(LoginBannerPanel, BorderLayout.PAGE_START);
+		loginFrame.add(loginMiddlePanel,BorderLayout.CENTER);
+		loginFrame.add(loginPanel, BorderLayout.PAGE_END);
+		/**
+		 * END OF LOGIN FRAME
+		 */
+
 		/**
 		 * START OF SIGNUP FRAME
 		 */
-			JPanel signUpBannerPanel = new JPanel();
-			JLabel signUpLabel = new JLabel("Sign-Up");
-			
-			JPanel emailSignPanel = new JPanel();
-			/**
-			 * Home Button
-			 */
-			JButton backHome = new JButton("HOME");
-			backHome.addActionListener(this);
-			/**
-			 * Email Field
-			 */
-			JLabel emailLabel = new JLabel("E-Mail Address");
-			emailArea = new JTextField(25);
-			/**
-			 * Password Field
-			 */
-			JPanel passwrodSignUpPanel = new JPanel();
-			JLabel passwordsignUpLabel = new JLabel("Password");
-			passwordSignUpArea = new JPasswordField(25);
-			/**
-			 * Phone Number Field
-			 */
-			JPanel phoneSignUpPanel = new JPanel();
-			JLabel phoneLabel = new JLabel("Contact Numbers");
-			phoneTextField = new JTextField(25);
-			/**
-			 * Submit Button
-			 */
-			signupButt = new JButton("Submit");
-			signupButt.addActionListener(this);
-			
-			signUpBannerPanel.add(signUpLabel);
-			emailSignPanel.add(emailLabel, BorderLayout.PAGE_START);
-			emailSignPanel.add(emailArea, BorderLayout.PAGE_END);
-			passwrodSignUpPanel.add(passwordsignUpLabel, BorderLayout.PAGE_START);
-			passwrodSignUpPanel.add(passwordSignUpArea, BorderLayout.PAGE_END);
-			phoneSignUpPanel.add(phoneLabel, BorderLayout.PAGE_START);
-			phoneSignUpPanel.add(phoneTextField, BorderLayout.PAGE_END);
-			
-			JPanel signUpInputs = new JPanel();
-			signUpInputs.add(emailSignPanel);
-			signUpInputs.add(passwrodSignUpPanel);
-			signUpInputs.add(phoneSignUpPanel);
-			
-			signupFrame = new JFrame();
-			signupFrame.setSize(500, 500);
-			signupFrame.setVisible(false);
-			signupFrame.add(signUpBannerPanel, BorderLayout.PAGE_START);
-			signupFrame.add(signUpInputs, BorderLayout.CENTER);
-			signupFrame.add(signupButt, BorderLayout.PAGE_END);
+		JPanel signUpBannerPanel = new JPanel();
+		JLabel signUpLabel = new JLabel("Sign-Up");
+
+		JPanel emailSignPanel = new JPanel();
+		/**
+		 * Home Button
+		 */
+		JButton backHome = new JButton("HOME");
+		backHome.addActionListener(this);
+		/**
+		 * Email Field
+		 */
+		JLabel emailLabel = new JLabel("E-Mail Address");
+		emailArea = new JTextField(25);
+		/**
+		 * Password Field
+		 */
+		JPanel passwrodSignUpPanel = new JPanel();
+		JLabel passwordsignUpLabel = new JLabel("Password");
+		passwordSignUpArea = new JPasswordField(25);
+		/**
+		 * Phone Number Field
+		 */
+		JPanel phoneSignUpPanel = new JPanel();
+		JLabel phoneLabel = new JLabel("Contact Numbers");
+		phoneTextField = new JTextField(25);
+		/**
+		 * Submit Button
+		 */
+		signupButt = new JButton("Submit");
+		signupButt.addActionListener(this);
+
+		signUpBannerPanel.add(signUpLabel);
+		emailSignPanel.add(emailLabel, BorderLayout.PAGE_START);
+		emailSignPanel.add(emailArea, BorderLayout.PAGE_END);
+		passwrodSignUpPanel.add(passwordsignUpLabel, BorderLayout.PAGE_START);
+		passwrodSignUpPanel.add(passwordSignUpArea, BorderLayout.PAGE_END);
+		phoneSignUpPanel.add(phoneLabel, BorderLayout.PAGE_START);
+		phoneSignUpPanel.add(phoneTextField, BorderLayout.PAGE_END);
+
+		JPanel signUpInputs = new JPanel();
+		signUpInputs.add(emailSignPanel);
+		signUpInputs.add(passwrodSignUpPanel);
+		signUpInputs.add(phoneSignUpPanel);
+
+		signupFrame = new JFrame();
+		signupFrame.setSize(500, 500);
+		signupFrame.setVisible(false);
+		signupFrame.add(signUpBannerPanel, BorderLayout.PAGE_START);
+		signupFrame.add(signUpInputs, BorderLayout.CENTER);
+		signupFrame.add(signupButt, BorderLayout.PAGE_END);
 		/**
 		 * END OF SIGNUP FRAME
 		 */
-						
+		/**
+		 * START OF CRUD DISPLAY		
+		 */
+		JPanel crudPanel = new JPanel();
+		JButton logout = new JButton(); 
+		JLabel crudHeading = new JLabel("ADMIN");
+		JButton adminBooking = new JButton("Create new Booking");//GOES TO BOOKING CREATION GUI
+		adminBooking.addActionListener(this);
+		JButton adminBookingDelete = new JButton("Delete a Booking");//GOES TO BOOKING DELETION GUI 
+		adminBookingDelete.addActionListener(this);
+		JButton adminAccountCreate = new JButton("Create Account");//GOES TO ACCOUNT CREATION GUI
+		adminAccountCreate.addActionListener(this);
+		JButton adminAccountDelete = new JButton("Account Deletion");//GOES TO ACCOUNT DELETION GUI
+		adminAccountDelete.addActionListener(this);
+		JRadioButton seat1InUse = new JRadioButton();//need to look up how to getinput frm these
+		JRadioButton seat2InUse = new JRadioButton();//??
+		JRadioButton seat3InUse = new JRadioButton();//??
+		JPanel adminHeadingPanel = new JPanel();
+		adminHeadingPanel.add(crudHeading);
+		JPanel adminButtonsPanel = new JPanel();
+		adminButtonsPanel.add(adminBooking);
+		adminButtonsPanel.add(adminBookingDelete);
+		adminButtonsPanel.add(adminAccountCreate);
+		adminButtonsPanel.add(adminAccountDelete);
+		JPanel adminSeats = new JPanel();
+		adminSeats.add(seat1InUse);
+		adminSeats.add(seat2InUse);
+		adminSeats.add(seat3InUse);			
+		/**
+		 * END OF CRUD DISPLAY
+		 */
+		/**
+		 * START OF CREATE ACCOUNT ADMIN PANEL	
+		 */
+		JPanel adminCreateBookingPanel = new JPanel();
+		JLabel adminAccCreationEmailLabel = new JLabel("Email");
+		/**
+		 * Email text area
+		 */
+		JTextArea adminAccCreateEmail = new JTextArea();//
+		JLabel adminAccCreatePhone = new JLabel("Phone");
+		/**
+		 * phone text area
+		 */
+		JTextArea adminCreatePhone = new JTextArea();//
+		/**
+		 * password text area
+		 */
+		JLabel adminAccCreatePass = new JLabel("Password");
+		JTextArea adminAccCreatePassTextArea = new JTextArea();//
+		/**
+		 * Submit button
+		 */
+		JButton createAccountSubmitButton = new JButton("Submit");//
+		createAccountSubmitButton.addActionListener(this);
+		
+		adminCreateBookingPanel.add(adminAccCreationEmailLabel);
+		adminCreateBookingPanel.add(adminAccCreateEmail);
+		adminCreateBookingPanel.add(adminAccCreatePhone);
+		adminCreateBookingPanel.add(adminCreatePhone);
+		adminCreateBookingPanel.add(adminAccCreatePass);
+		adminCreateBookingPanel.add(adminAccCreatePassTextArea);
+		adminCreateBookingPanel.add(createAccountSubmitButton);
+		/**
+		 * END OF CREATE ACCOUNT ADMIN PANEL
+		 */
+		/**
+		 * START OF ACCOUNT DELETION ADMIN PANEL
+		 */
+		JPanel adminAccDeletionPanel = new JPanel();
+		JLabel accDeletionEmail = new JLabel("Email");
+		/**
+		 * ACCOUNT DELETION TEXTAREA
+		 */
+		JTextArea accDeletionEmailArea = new JTextArea();
+		/**
+		 * SUBMIT BUTTON
+		 */
+		JButton deletionSubmit = new JButton("Submit");
+		deletionSubmit.addActionListener(this);
+		adminAccDeletionPanel.add(accDeletionEmail);
+		adminAccDeletionPanel.add(accDeletionEmailArea);
+		adminAccDeletionPanel.add(deletionSubmit);	
+		/**
+		 * END OF ACCOUNT DELTION PANEL
+		 */
+		/**
+		 * START OF CREATE A BOOKING ADMIN 
+		 */
+		JPanel adminBookingCreationPanel = new JPanel();
+		/**
+		 * NOT FINISHED
+		 */
+		
+		
 	}
-	
+
 
 	/**
 	 * Main Class
@@ -395,14 +489,14 @@ public class AceVenturaBarberTheFirst extends JFrame implements ActionListener{
 			User user = new User(emailArea.getText(), new String(passwordSignUpArea.getPassword()), phoneTextField.getText());
 			DBConnection.setUser(user);
 			DBConnection.insertUser(user);
-			
+
 		}
 		/**
 		 * END OF ACTIONLISTENERS
 		 */
 	}
-/**
- * END OF PROGRAM
- */
+	/**
+	 * END OF PROGRAM
+	 */
 
 }
