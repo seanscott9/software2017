@@ -2,6 +2,7 @@ package db;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
+import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.Statement;
 
@@ -111,10 +112,16 @@ public class DBConnection {
 			/**
 			 * The SELECT SQL Statement
 			 */
-			Statement statement = connection.createStatement();
-			String query = "SELECT * FROM users WHERE email='" + usr + "' AND password='" + pwd + "';";
-			System.out.println("[SQL QUERY] " + query);
-			ResultSet resultSet = statement.executeQuery(query);
+			//The SQLInjection fix
+			//Statement statement = connection.createStatement();
+			//String query = "SELECT * FROM users WHERE email='" + usr + "' AND password='" + pwd + "';";
+			//System.out.println("[SQL QUERY] " + query);
+			//ResultSet resultSet = statement.executeQuery(query);
+			ResultSet resultSet = null;
+			PreparedStatement pst = connection.prepareStatement("SELECT * FROM users WHERE email=? AND password =?");
+			pst.setString(1, usr);
+			pst.setString(2, usr);
+			resultSet = pst.executeQuery();
 			if(resultSet.next()) {
 				System.out.println("User record found");
 				System.out.println("ID: " + resultSet.getInt("id"));
