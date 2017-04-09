@@ -47,10 +47,21 @@ public class AceVenturaBarberTheFirst extends JFrame implements ActionListener{
 	JTextField phoneTextField;
 	JTextField emailArea;
 	JPasswordField passwordSignUpArea;
-
-
+	/*
+	 * ADMIN CRUD ELEMENTS
+	 */
+	JFrame crudFrame;
+	JPanel adminCreateBookingPanel;
+	JButton adminBooking;
+	JPanel adminAccDeletionPanel;
+	JButton adminBookingDelete;
+	JButton adminAccountCreate;
+	JPanel adminBookingCreationPanel;
+	JButton adminAccountDelete;
+	
 	public AceVenturaBarberTheFirst(){
 		super("Barbershop");
+		////////////////////////////////////////////////////////////////////////////
 		/**
 		 * Main frame
 		 */
@@ -150,7 +161,7 @@ public class AceVenturaBarberTheFirst extends JFrame implements ActionListener{
 		/**
 		 * END OF MAIN FRAME
 		 */
-
+		////////////////////////////////////////////////////////////////////////////////////////////////////
 		/**
 		 * START OF CALENDAR FRAME	
 		 */
@@ -171,11 +182,23 @@ public class AceVenturaBarberTheFirst extends JFrame implements ActionListener{
 		panelTop.add(bannerLabel);
 		panelTop.add(logoutButt);
 
-		String[] dates ={"dates","will","be","here"};
-
-		JComboBox<String> datesDropDown = new JComboBox<String>(dates);
+		String[] days ={"Monday","Tuesday","Wednsday","Thursday", "Friday", "Saturday", "Sunday"};
+		JLabel labelDays = new JLabel("Days");
+		/*
+		 * SELECT DATE HERE
+		 */
+		JComboBox<String> datesDropDown = new JComboBox<String>(days);
+		
+		JLabel times = new JLabel("Times");
+		/*
+		 * SELECT TIME TIME
+		 */
+		JComboBox<String> timesDropDown = new JComboBox<String> (new String[] {"9.00","10.00","11.00","12.00","13.00","14.00","15.00","16.00","17.00","18.00"});
 		JPanel middle = new JPanel();
+		middle.add(labelDays);
 		middle.add(datesDropDown);
+		middle.add(times);
+		middle.add(timesDropDown);
 
 
 		makeBooking = new JButton("Make Booking");
@@ -192,6 +215,7 @@ public class AceVenturaBarberTheFirst extends JFrame implements ActionListener{
 		/**
 		 * END OF CALENDAR FRAME
 		 */
+		/////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 		/**
 		 * START OF LOGIN FRAME
 		 */
@@ -242,7 +266,7 @@ public class AceVenturaBarberTheFirst extends JFrame implements ActionListener{
 		/**
 		 * END OF LOGIN FRAME
 		 */
-
+		/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 		/**
 		 * START OF SIGNUP FRAME
 		 */
@@ -300,19 +324,20 @@ public class AceVenturaBarberTheFirst extends JFrame implements ActionListener{
 		/**
 		 * END OF SIGNUP FRAME
 		 */
+		/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 		/**
-		 * START OF CRUD DISPLAY		
+		 * START OF CRUD HOME DISPLAY		
 		 */
-		JPanel crudPanel = new JPanel();
-		JButton logout = new JButton(); 
+		crudFrame = new JFrame();
+		JButton logout = new JButton(); ///REMEMBER TO IMPLEMENT
 		JLabel crudHeading = new JLabel("ADMIN");
-		JButton adminBooking = new JButton("Create new Booking");//GOES TO BOOKING CREATION GUI
+		adminBooking = new JButton("Create new Booking");//GOES TO BOOKING CREATION GUI
 		adminBooking.addActionListener(this);
-		JButton adminBookingDelete = new JButton("Delete a Booking");//GOES TO BOOKING DELETION GUI 
+		adminBookingDelete = new JButton("Delete a Booking");//GOES TO BOOKING DELETION GUI 
 		adminBookingDelete.addActionListener(this);
-		JButton adminAccountCreate = new JButton("Create Account");//GOES TO ACCOUNT CREATION GUI
+		adminAccountCreate = new JButton("Create Account");//GOES TO ACCOUNT CREATION GUI
 		adminAccountCreate.addActionListener(this);
-		JButton adminAccountDelete = new JButton("Account Deletion");//GOES TO ACCOUNT DELETION GUI
+		adminAccountDelete = new JButton("Account Deletion");//GOES TO ACCOUNT DELETION GUI
 		adminAccountDelete.addActionListener(this);
 		JRadioButton seat1InUse = new JRadioButton();//need to look up how to getinput frm these
 		JRadioButton seat2InUse = new JRadioButton();//??
@@ -327,14 +352,20 @@ public class AceVenturaBarberTheFirst extends JFrame implements ActionListener{
 		JPanel adminSeats = new JPanel();
 		adminSeats.add(seat1InUse);
 		adminSeats.add(seat2InUse);
-		adminSeats.add(seat3InUse);			
+		adminSeats.add(seat3InUse);	
+		
+		crudFrame.add(adminHeadingPanel, BorderLayout.PAGE_START);
+		crudFrame.add(adminButtonsPanel, BorderLayout.CENTER);
+		crudFrame.add(adminSeats, BorderLayout.PAGE_END);
+		
 		/**
-		 * END OF CRUD DISPLAY
+		 * END OF CRUD HOME DISPLAY
 		 */
+		//////////////////////////////////////////////////////////////////////////////////////////////////////////
 		/**
 		 * START OF CREATE ACCOUNT ADMIN PANEL	
 		 */
-		JPanel adminCreateBookingPanel = new JPanel();
+		adminCreateBookingPanel = new JPanel();
 		JLabel adminAccCreationEmailLabel = new JLabel("Email");
 		/**
 		 * Email text area
@@ -366,10 +397,11 @@ public class AceVenturaBarberTheFirst extends JFrame implements ActionListener{
 		/**
 		 * END OF CREATE ACCOUNT ADMIN PANEL
 		 */
+		////////////////////////////////////////////////////////////////////////////////////////////////////////////
 		/**
 		 * START OF ACCOUNT DELETION ADMIN PANEL
 		 */
-		JPanel adminAccDeletionPanel = new JPanel();
+		adminAccDeletionPanel = new JPanel();
 		JLabel accDeletionEmail = new JLabel("Email");
 		/**
 		 * ACCOUNT DELETION TEXTAREA
@@ -386,12 +418,32 @@ public class AceVenturaBarberTheFirst extends JFrame implements ActionListener{
 		/**
 		 * END OF ACCOUNT DELTION PANEL
 		 */
+		//////////////////////////////////////////////////////////////////////////////////////////////////////////////
 		/**
-		 * START OF CREATE A BOOKING ADMIN 
+		 * START OF CREATE A BOOKING ADMIN PANEL
 		 */
-		JPanel adminBookingCreationPanel = new JPanel();
+		adminBookingCreationPanel = new JPanel();
+		JLabel adminLabelDay = new JLabel("Day");
+		/*
+		 * DATES HERE
+		 */
+		JComboBox<String> adminDatesDropDown = new JComboBox<String>(new String[]{"Monday","Tuesday","Wednsday","Thursday", "Friday", "Saturday", "Sunday"});
+		JLabel adminLabelTimes = new JLabel("Times");
+		/*
+		 * TIMES HERE
+		 */
+		JComboBox<String> adminTimesDropDown = new JComboBox<String> (new String[] {"9.00","10.00","11.00","12.00","13.00","14.00","15.00","16.00","17.00","18.00"});
+		JButton adminBookingCreationSubmit = new JButton("Submit");
+		
+		
+		adminBookingCreationPanel.add(adminLabelDay);
+		adminBookingCreationPanel.add(adminDatesDropDown);
+		adminBookingCreationPanel.add(adminLabelTimes);
+		adminBookingCreationPanel.add(adminTimesDropDown);
+		adminBookingCreationPanel.add(adminBookingCreationSubmit);
+
 		/**
-		 * NOT FINISHED
+		 * END OF CREATE BOOKING ADMIN PANEL
 		 */
 		
 		
@@ -490,6 +542,23 @@ public class AceVenturaBarberTheFirst extends JFrame implements ActionListener{
 			DBConnection.setUser(user);
 			DBConnection.insertUser(user);
 
+		}
+		if(source == makeBooking){
+			/**
+			 * SUBMIT BUTTON ON BOOKING PAGE
+			 */
+		}
+		if(source == adminBooking){
+			crudFrame.add(adminCreateBookingPanel);
+		}
+		if(source == adminBookingDelete){
+			crudFrame.add(adminAccDeletionPanel);
+		}
+		if(source == adminAccountCreate){
+			crudFrame.add(adminBookingCreationPanel);
+		}
+		if(source == adminAccountDelete){
+			
 		}
 		/**
 		 * END OF ACTIONLISTENERS
