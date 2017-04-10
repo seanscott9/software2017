@@ -58,6 +58,14 @@ public class AceVenturaBarberTheFirst extends JFrame implements ActionListener{
 	JButton adminAccountCreate;
 	JPanel adminBookingCreationPanel;
 	JButton adminAccountDelete;
+	//ADMIN DATA
+	JRadioButton seat1InUse;
+	JRadioButton seat2InUse; 
+	JRadioButton seat3InUse;
+	JTextArea adminAccCreateEmail;//create email
+	JTextArea adminCreatePhone;//create phone
+	JTextArea adminAccCreatePassTextArea;//create password
+	JButton createAccountSubmitButton;//admin create accoutn submit bttn
 	
 	public AceVenturaBarberTheFirst(){
 		super("Barbershop");
@@ -277,8 +285,8 @@ public class AceVenturaBarberTheFirst extends JFrame implements ActionListener{
 		/**
 		 * Home Button
 		 */
-		JButton backHome = new JButton("HOME");
-		backHome.addActionListener(this);
+		homeButt = new JButton("HOME");
+		homeButt.addActionListener(this);
 		/**
 		 * Email Field
 		 */
@@ -339,9 +347,9 @@ public class AceVenturaBarberTheFirst extends JFrame implements ActionListener{
 		adminAccountCreate.addActionListener(this);
 		adminAccountDelete = new JButton("Account Deletion");//GOES TO ACCOUNT DELETION GUI
 		adminAccountDelete.addActionListener(this);
-		JRadioButton seat1InUse = new JRadioButton();//need to look up how to getinput frm these
-		JRadioButton seat2InUse = new JRadioButton();//??
-		JRadioButton seat3InUse = new JRadioButton();//??
+		seat1InUse = new JRadioButton();//need to look up how to getinput frm these
+		seat2InUse = new JRadioButton();//??
+		seat3InUse = new JRadioButton();//??
 		JPanel adminHeadingPanel = new JPanel();
 		adminHeadingPanel.add(crudHeading);
 		JPanel adminButtonsPanel = new JPanel();
@@ -370,21 +378,21 @@ public class AceVenturaBarberTheFirst extends JFrame implements ActionListener{
 		/**
 		 * Email text area
 		 */
-		JTextArea adminAccCreateEmail = new JTextArea();//
+		adminAccCreateEmail = new JTextArea();//
 		JLabel adminAccCreatePhone = new JLabel("Phone");
 		/**
 		 * phone text area
 		 */
-		JTextArea adminCreatePhone = new JTextArea();//
+		adminCreatePhone = new JTextArea();//
 		/**
 		 * password text area
 		 */
 		JLabel adminAccCreatePass = new JLabel("Password");
-		JTextArea adminAccCreatePassTextArea = new JTextArea();//
+		adminAccCreatePassTextArea = new JTextArea();//
 		/**
 		 * Submit button
 		 */
-		JButton createAccountSubmitButton = new JButton("Submit");//
+		createAccountSubmitButton = new JButton("Submit");//
 		createAccountSubmitButton.addActionListener(this);
 		
 		adminCreateBookingPanel.add(adminAccCreationEmailLabel);
@@ -558,8 +566,12 @@ public class AceVenturaBarberTheFirst extends JFrame implements ActionListener{
 			crudFrame.add(adminBookingCreationPanel);
 		}
 		if(source == adminAccountDelete){
-			
+			crudFrame.add(adminAccDeletionPanel);
 		}
+		if(source == adminAccountCreate){
+			crudFrame.add(adminBookingCreationPanel);
+		}
+
 		/**
 		 * END OF ACTIONLISTENERS
 		 */
