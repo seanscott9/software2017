@@ -7,7 +7,7 @@ import db.DBConnection;
 import db.User;
 /**
  * Ace Ventura's Detective Agency
- * @author Seán Scott, Liam Walsh
+ * @author Sean Scott, Liam Walsh
  * version 1.0 28/02/2017
  */
 public class AceVenturaBarberTheFirst extends JFrame implements ActionListener{
@@ -15,6 +15,11 @@ public class AceVenturaBarberTheFirst extends JFrame implements ActionListener{
 	 * Main Class
 	 */
 	private static final long serialVersionUID = 1L;
+
+	/**
+	 * IS USER AN ADMIN
+	 */
+	Boolean isAdmin = false;
 	/**
 	 * Home window Frame and Buttons
 	 */
@@ -51,13 +56,15 @@ public class AceVenturaBarberTheFirst extends JFrame implements ActionListener{
 	 * ADMIN CRUD ELEMENTS
 	 */
 	JFrame crudFrame;
-	JPanel adminCreateBookingPanel;
+	JPanel adminCreateAccountPanel;
 	JButton adminBooking;
 	JPanel adminAccDeletionPanel;
 	JButton adminBookingDelete;
 	JButton adminAccountCreate;
 	JPanel adminBookingCreationPanel;
 	JButton adminAccountDelete;
+	JPanel crudPanel;
+	JPanel adminBookingDeletionPanel;
 	//ADMIN DATA
 	JRadioButton seat1InUse;
 	JRadioButton seat2InUse; 
@@ -66,7 +73,10 @@ public class AceVenturaBarberTheFirst extends JFrame implements ActionListener{
 	JTextArea adminCreatePhone;//create phone
 	JTextArea adminAccCreatePassTextArea;//create password
 	JButton createAccountSubmitButton;//admin create accoutn submit bttn
-	
+	JButton adminBookingCreationSubmit;//admin create booking submit
+	JButton adminBookingDeletionSubmit;//admin delete booking sublit
+	JButton deletionSubmit;//admin account deletion submit button
+
 	public AceVenturaBarberTheFirst(){
 		super("Barbershop");
 		////////////////////////////////////////////////////////////////////////////
@@ -196,7 +206,7 @@ public class AceVenturaBarberTheFirst extends JFrame implements ActionListener{
 		 * SELECT DATE HERE
 		 */
 		JComboBox<String> datesDropDown = new JComboBox<String>(days);
-		
+
 		JLabel times = new JLabel("Times");
 		/*
 		 * SELECT TIME TIME
@@ -353,6 +363,7 @@ public class AceVenturaBarberTheFirst extends JFrame implements ActionListener{
 		JPanel adminHeadingPanel = new JPanel();
 		adminHeadingPanel.add(crudHeading);
 		JPanel adminButtonsPanel = new JPanel();
+		adminButtonsPanel.setLayout(new BoxLayout(adminButtonsPanel, BoxLayout.PAGE_AXIS));
 		adminButtonsPanel.add(adminBooking);
 		adminButtonsPanel.add(adminBookingDelete);
 		adminButtonsPanel.add(adminAccountCreate);
@@ -361,11 +372,14 @@ public class AceVenturaBarberTheFirst extends JFrame implements ActionListener{
 		adminSeats.add(seat1InUse);
 		adminSeats.add(seat2InUse);
 		adminSeats.add(seat3InUse);	
-		
-		crudFrame.add(adminHeadingPanel, BorderLayout.PAGE_START);
-		crudFrame.add(adminButtonsPanel, BorderLayout.CENTER);
-		crudFrame.add(adminSeats, BorderLayout.PAGE_END);
-		
+		crudPanel = new JPanel();
+
+
+		crudPanel.add(adminHeadingPanel, BorderLayout.PAGE_START);
+		crudPanel.add(adminButtonsPanel, BorderLayout.CENTER);
+		crudPanel.add(adminSeats, BorderLayout.PAGE_END);
+		crudFrame.add(crudPanel);
+
 		/**
 		 * END OF CRUD HOME DISPLAY
 		 */
@@ -373,7 +387,7 @@ public class AceVenturaBarberTheFirst extends JFrame implements ActionListener{
 		/**
 		 * START OF CREATE ACCOUNT ADMIN PANEL	
 		 */
-		adminCreateBookingPanel = new JPanel();
+		adminCreateAccountPanel = new JPanel();
 		JLabel adminAccCreationEmailLabel = new JLabel("Email");
 		/**
 		 * Email text area
@@ -394,14 +408,15 @@ public class AceVenturaBarberTheFirst extends JFrame implements ActionListener{
 		 */
 		createAccountSubmitButton = new JButton("Submit");//
 		createAccountSubmitButton.addActionListener(this);
-		
-		adminCreateBookingPanel.add(adminAccCreationEmailLabel);
-		adminCreateBookingPanel.add(adminAccCreateEmail);
-		adminCreateBookingPanel.add(adminAccCreatePhone);
-		adminCreateBookingPanel.add(adminCreatePhone);
-		adminCreateBookingPanel.add(adminAccCreatePass);
-		adminCreateBookingPanel.add(adminAccCreatePassTextArea);
-		adminCreateBookingPanel.add(createAccountSubmitButton);
+		adminCreateAccountPanel.setLayout(new BoxLayout(adminCreateAccountPanel, BoxLayout.PAGE_AXIS));	
+
+		adminCreateAccountPanel.add(adminAccCreationEmailLabel);
+		adminCreateAccountPanel.add(adminAccCreateEmail);
+		adminCreateAccountPanel.add(adminAccCreatePhone);
+		adminCreateAccountPanel.add(adminCreatePhone);
+		adminCreateAccountPanel.add(adminAccCreatePass);
+		adminCreateAccountPanel.add(adminAccCreatePassTextArea);
+		adminCreateAccountPanel.add(createAccountSubmitButton);
 		/**
 		 * END OF CREATE ACCOUNT ADMIN PANEL
 		 */
@@ -410,6 +425,8 @@ public class AceVenturaBarberTheFirst extends JFrame implements ActionListener{
 		 * START OF ACCOUNT DELETION ADMIN PANEL
 		 */
 		adminAccDeletionPanel = new JPanel();
+		adminAccDeletionPanel.setLayout(new BoxLayout(adminAccDeletionPanel, BoxLayout.PAGE_AXIS));	
+
 		JLabel accDeletionEmail = new JLabel("Email");
 		/**
 		 * ACCOUNT DELETION TEXTAREA
@@ -418,7 +435,7 @@ public class AceVenturaBarberTheFirst extends JFrame implements ActionListener{
 		/**
 		 * SUBMIT BUTTON
 		 */
-		JButton deletionSubmit = new JButton("Submit");
+		deletionSubmit = new JButton("Submit");
 		deletionSubmit.addActionListener(this);
 		adminAccDeletionPanel.add(accDeletionEmail);
 		adminAccDeletionPanel.add(accDeletionEmailArea);
@@ -431,6 +448,7 @@ public class AceVenturaBarberTheFirst extends JFrame implements ActionListener{
 		 * START OF CREATE A BOOKING ADMIN PANEL
 		 */
 		adminBookingCreationPanel = new JPanel();
+		adminBookingCreationPanel.setLayout(new BoxLayout(adminBookingCreationPanel, BoxLayout.PAGE_AXIS));	
 		JLabel adminLabelDay = new JLabel("Day");
 		/*
 		 * DATES HERE
@@ -441,9 +459,9 @@ public class AceVenturaBarberTheFirst extends JFrame implements ActionListener{
 		 * TIMES HERE
 		 */
 		JComboBox<String> adminTimesDropDown = new JComboBox<String> (new String[] {"9.00","10.00","11.00","12.00","13.00","14.00","15.00","16.00","17.00","18.00"});
-		JButton adminBookingCreationSubmit = new JButton("Submit");
-		
-		
+		adminBookingCreationSubmit = new JButton("Submit");
+
+	
 		adminBookingCreationPanel.add(adminLabelDay);
 		adminBookingCreationPanel.add(adminDatesDropDown);
 		adminBookingCreationPanel.add(adminLabelTimes);
@@ -453,8 +471,33 @@ public class AceVenturaBarberTheFirst extends JFrame implements ActionListener{
 		/**
 		 * END OF CREATE BOOKING ADMIN PANEL
 		 */
-		
-		
+		/**
+		 * booking deletion admin Panel
+		 */
+		adminBookingDeletionPanel = new JPanel();
+		adminBookingDeletionPanel.setLayout(new BoxLayout(adminBookingCreationPanel, BoxLayout.PAGE_AXIS));	
+		JLabel adminLabelDayDEletion = new JLabel("Day");
+		/*
+		 * DATES HERE
+		 */
+		JComboBox<String> adminDatesDropDownDeletion = new JComboBox<String>(new String[]{"Monday","Tuesday","Wednsday","Thursday", "Friday", "Saturday", "Sunday"});
+		JLabel adminLabelTimesDeletion = new JLabel("Times");
+		/*
+		 * TIMES HERE
+		 */
+		JComboBox<String> adminTimesDropDownDeletion = new JComboBox<String> (new String[] {"9.00","10.00","11.00","12.00","13.00","14.00","15.00","16.00","17.00","18.00"});
+		adminBookingDeletionSubmit = new JButton("Submit");
+
+
+		adminBookingDeletionPanel.add(adminLabelDay);
+		adminBookingDeletionPanel.add(adminDatesDropDown);
+		adminBookingDeletionPanel.add(adminLabelTimes);
+		adminBookingDeletionPanel.add(adminTimesDropDown);
+		adminBookingDeletionPanel.add(adminBookingCreationSubmit);
+		/**
+		 * END OF BOOKING DELETION ADMIN PANEL
+		 */
+
 	}
 
 
@@ -526,7 +569,15 @@ public class AceVenturaBarberTheFirst extends JFrame implements ActionListener{
 				DBConnection.setUser(user);
 				frame.setVisible(true);
 				loginFrame.setVisible(false);
-			}	
+			}
+			 
+			//if logged as admin goes straigth to admin mode
+			if(isAdmin = true){
+				loginFrame.setVisible(false);
+				crudFrame.setVisible(true);
+				crudFrame.setSize(500, 500);		
+			}
+
 		}
 		/**
 		 * Home Button Action
@@ -556,21 +607,93 @@ public class AceVenturaBarberTheFirst extends JFrame implements ActionListener{
 			 * SUBMIT BUTTON ON BOOKING PAGE
 			 */
 		}
+		/*
+		 * admin make booking
+		 */
 		if(source == adminBooking){
-			crudFrame.add(adminCreateBookingPanel);
+			crudFrame.remove(crudPanel);
+			crudFrame.add(adminBookingCreationPanel);
+			crudFrame.revalidate(); 
+			crudFrame.repaint(); 
 		}
+		/*
+		 * submit for admin booking
+		 * meeds the sql
+		 */
+		if(source == adminBookingCreationSubmit){
+			//add in sql
+
+			crudFrame.remove(adminBookingCreationPanel);
+			crudFrame.add(crudPanel);
+			crudFrame.revalidate(); 
+			crudFrame.repaint(); 
+		}
+		/*
+		 * admin delete booking panel
+		 */
 		if(source == adminBookingDelete){
-			crudFrame.add(adminAccDeletionPanel);
+			crudFrame.remove(crudPanel);
+			crudFrame.add(adminBookingDeletionPanel);
+			crudFrame.revalidate(); 
+			crudFrame.repaint(); 
 		}
+		/*
+		 * admin booking delete submit button
+		 */
+		if(source == adminBookingDeletionSubmit){
+			//ADD IN SQL
+
+			crudFrame.remove(adminBookingDeletionPanel);
+			crudFrame.add(crudPanel);
+			crudFrame.revalidate(); 
+			crudFrame.repaint(); 
+		}
+		/*
+		 * admin account create account
+		 */
 		if(source == adminAccountCreate){
-			crudFrame.add(adminBookingCreationPanel);
+			crudFrame.remove(crudPanel);
+			crudFrame.add(adminCreateAccountPanel);
+			crudFrame.revalidate(); 
+			crudFrame.repaint(); 
 		}
+		/*
+		 * admin account cretion submit button
+		 */
+		if(source == adminBookingCreationSubmit){
+			//ADD IN SQL
+			
+			crudFrame.remove(adminCreateAccountPanel);
+			crudFrame.add(crudPanel);
+			crudFrame.revalidate(); 
+			crudFrame.repaint(); 
+		}
+		/*
+		 * admin delete account panel
+		 */
 		if(source == adminAccountDelete){
+			crudFrame.remove(crudPanel);
 			crudFrame.add(adminAccDeletionPanel);
+			crudFrame.revalidate(); 
+			crudFrame.repaint(); 
 		}
-		if(source == adminAccountCreate){
-			crudFrame.add(adminBookingCreationPanel);
+		/*
+		 * admin account deletion
+		 */
+		if(source == deletionSubmit){
+			//ADD in sql
+			
+			crudFrame.remove(adminAccDeletionPanel);
+			crudFrame.add(crudPanel);
+			crudFrame.revalidate(); 
+			crudFrame.repaint();
 		}
+
+
+
+
+
+
 
 		/**
 		 * END OF ACTIONLISTENERS
