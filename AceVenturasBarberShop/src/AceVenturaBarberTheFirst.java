@@ -3,6 +3,8 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 import javax.swing.*;
+
+import db.Booking;
 import db.DBConnection;
 import db.User;
 /**
@@ -20,6 +22,8 @@ public class AceVenturaBarberTheFirst extends JFrame implements ActionListener{
 	 * IS USER AN ADMIN
 	 */
 	Boolean isAdmin = false;
+	Boolean isLogged = false;
+	User user;
 	/**
 	 * Home window Frame and Buttons
 	 */
@@ -38,6 +42,8 @@ public class AceVenturaBarberTheFirst extends JFrame implements ActionListener{
 	JLabel bannerLabel;
 	JButton logoutButt;
 	JButton makeBooking;
+	JComboBox<String> timesDropDown;
+	JComboBox<String> datesDropDown;
 	/**
 	 * Login Frame and Buttons
 	 */
@@ -76,6 +82,12 @@ public class AceVenturaBarberTheFirst extends JFrame implements ActionListener{
 	JButton adminBookingCreationSubmit;//admin create booking submit
 	JButton adminBookingDeletionSubmit;//admin delete booking sublit
 	JButton deletionSubmit;//admin account deletion submit button
+	JComboBox<String> adminDatesDropDownDeletion;
+	JComboBox<String> adminTimesDropDownDeletion;
+	JTextArea accDeletionEmailArea;
+	JComboBox<String> adminDatesDropDown;
+	JComboBox<String> adminTimesDropDown;
+	
 
 	public AceVenturaBarberTheFirst(){
 		super("Barbershop");
@@ -122,8 +134,10 @@ public class AceVenturaBarberTheFirst extends JFrame implements ActionListener{
 		/**
 		 * Calendar Button
 		 */
-		viewCalendar = new JButton("ViewCalendar(placeholder)");
+		
+		viewCalendar = new JButton("Make a Booking");
 		viewCalendar.addActionListener(this);
+		
 		/**
 		 * Login Button
 		 */
@@ -164,12 +178,18 @@ public class AceVenturaBarberTheFirst extends JFrame implements ActionListener{
 		/**
 		 * West Panel
 		 */
-		westPanel.add(timeSlotBookingButt);
+		
 		westPanel.add(registrationButt);
 		/**
 		 * East Panel
 		 */
+		if(isLogged == false)
+		{
+			viewCalendar.setVisible(false);
+		}
+		
 		eastPanel.add(viewCalendar);
+		
 		eastPanel.add(logButt);
 
 		frame.add(northPanel, BorderLayout.PAGE_START);
@@ -205,13 +225,13 @@ public class AceVenturaBarberTheFirst extends JFrame implements ActionListener{
 		/*
 		 * SELECT DATE HERE
 		 */
-		JComboBox<String> datesDropDown = new JComboBox<String>(days);
+		datesDropDown = new JComboBox<String>(days);
 
 		JLabel times = new JLabel("Times");
 		/*
 		 * SELECT TIME TIME
 		 */
-		JComboBox<String> timesDropDown = new JComboBox<String> (new String[] {"9.00","10.00","11.00","12.00","13.00","14.00","15.00","16.00","17.00","18.00"});
+		timesDropDown = new JComboBox<String> (new String[] {"9.00","10.00","11.00","12.00","13.00","14.00","15.00","16.00","17.00","18.00"});
 		JPanel middle = new JPanel();
 		middle.add(labelDays);
 		middle.add(datesDropDown);
@@ -431,7 +451,7 @@ public class AceVenturaBarberTheFirst extends JFrame implements ActionListener{
 		/**
 		 * ACCOUNT DELETION TEXTAREA
 		 */
-		JTextArea accDeletionEmailArea = new JTextArea();
+		accDeletionEmailArea = new JTextArea();
 		/**
 		 * SUBMIT BUTTON
 		 */
@@ -453,7 +473,7 @@ public class AceVenturaBarberTheFirst extends JFrame implements ActionListener{
 		/*
 		 * DATES HERE
 		 */
-		JComboBox<String> adminDatesDropDown = new JComboBox<String>(new String[]{"Monday","Tuesday","Wednsday","Thursday", "Friday", "Saturday", "Sunday"});
+		adminDatesDropDown = new JComboBox<String>(new String[]{"Monday","Tuesday","Wednsday","Thursday", "Friday", "Saturday", "Sunday"});
 		JLabel adminLabelTimes = new JLabel("Times");
 		/*
 		 * TIMES HERE
@@ -480,12 +500,13 @@ public class AceVenturaBarberTheFirst extends JFrame implements ActionListener{
 		/*
 		 * DATES HERE
 		 */
-		JComboBox<String> adminDatesDropDownDeletion = new JComboBox<String>(new String[]{"Monday","Tuesday","Wednsday","Thursday", "Friday", "Saturday", "Sunday"});
+		
+		adminDatesDropDownDeletion = new JComboBox<String>(new String[]{"Monday","Tuesday","Wednsday","Thursday", "Friday", "Saturday", "Sunday"});
 		JLabel adminLabelTimesDeletion = new JLabel("Times");
 		/*
 		 * TIMES HERE
 		 */
-		JComboBox<String> adminTimesDropDownDeletion = new JComboBox<String> (new String[] {"9.00","10.00","11.00","12.00","13.00","14.00","15.00","16.00","17.00","18.00"});
+		adminTimesDropDownDeletion = new JComboBox<String> (new String[] {"9.00","10.00","11.00","12.00","13.00","14.00","15.00","16.00","17.00","18.00"});
 		adminBookingDeletionSubmit = new JButton("Submit");
 
 
@@ -561,22 +582,30 @@ public class AceVenturaBarberTheFirst extends JFrame implements ActionListener{
 			/**
 			 * Calls the DBConnection LogIn and passes the varibles
 			 */
-			System.out.println("Login: " + usrName.getText() + ", Password: " + pwd.getText());
-			User user = DBConnection.logIn(usrName.getText(), pwd.getText());
-			if(user != null) 
-			{
-				System.out.println("Login userID: " + user.getUserID());
-				DBConnection.setUser(user);
-				frame.setVisible(true);
-				loginFrame.setVisible(false);
-			}
+			
+				System.out.println("Login: " + usrName.getText() + ", Password: " + pwd.getText());
+				user = DBConnection.logIn(usrName.getText(), pwd.getText());
+				boolean isAdmin = DBConnection.isAdmin(user);
+				if(user != null && isAdmin == false) 
+				{
+					System.out.println("Login userID: " + user.getUserID());
+					DBConnection.setUser(user);
+					frame.setVisible(true);
+					loginFrame.setVisible(false);
+					isLogged = true;
+					viewCalendar.setVisible(true);
+					
+				}
+			
 			 
 			//if logged as admin goes straigth to admin mode
-			if(isAdmin = true){
-				loginFrame.setVisible(false);
-				crudFrame.setVisible(true);
-				crudFrame.setSize(500, 500);		
-			}
+				if(user != null && isAdmin == true)
+				{
+					loginFrame.setVisible(false);
+					crudFrame.setVisible(true);
+					crudFrame.setSize(500, 500);
+					isLogged = true;
+				}
 
 		}
 		/**
@@ -606,6 +635,12 @@ public class AceVenturaBarberTheFirst extends JFrame implements ActionListener{
 			/**
 			 * SUBMIT BUTTON ON BOOKING PAGE
 			 */
+			Booking booking = new Booking(new String((String) timesDropDown.getSelectedItem()) ,new String((String) datesDropDown.getSelectedItem()));
+			DBConnection.insertBooking(booking, user);
+			System.out.println("Booking for " + (String)timesDropDown.getSelectedItem() + " on " + (String)datesDropDown.getSelectedItem());
+			calFrame.setVisible(false);
+			frame.setVisible(true);
+			
 		}
 		/*
 		 * admin make booking
@@ -618,10 +653,12 @@ public class AceVenturaBarberTheFirst extends JFrame implements ActionListener{
 		}
 		/*
 		 * submit for admin booking
-		 * meeds the sql
+		 * 
 		 */
 		if(source == adminBookingCreationSubmit){
-			//add in sql
+			Booking booking = new Booking(new String((String) adminTimesDropDown.getSelectedItem()) ,new String((String) adminDatesDropDown.getSelectedItem()));
+			DBConnection.insertBooking(booking, user);
+			System.out.println("Booking for " + (String)adminTimesDropDown.getSelectedItem() + " on " + (String)adminDatesDropDown.getSelectedItem());
 
 			crudFrame.remove(adminBookingCreationPanel);
 			crudFrame.add(crudPanel);
@@ -632,6 +669,7 @@ public class AceVenturaBarberTheFirst extends JFrame implements ActionListener{
 		 * admin delete booking panel
 		 */
 		if(source == adminBookingDelete){
+			
 			crudFrame.remove(crudPanel);
 			crudFrame.add(adminBookingDeletionPanel);
 			crudFrame.revalidate(); 
@@ -641,8 +679,9 @@ public class AceVenturaBarberTheFirst extends JFrame implements ActionListener{
 		 * admin booking delete submit button
 		 */
 		if(source == adminBookingDeletionSubmit){
-			//ADD IN SQL
-
+			
+			Booking booking = new Booking(new String((String) adminTimesDropDownDeletion.getSelectedItem()) ,new String((String) adminDatesDropDownDeletion.getSelectedItem()));
+			DBConnection.deleteBooking(booking, user);
 			crudFrame.remove(adminBookingDeletionPanel);
 			crudFrame.add(crudPanel);
 			crudFrame.revalidate(); 
@@ -658,11 +697,15 @@ public class AceVenturaBarberTheFirst extends JFrame implements ActionListener{
 			crudFrame.repaint(); 
 		}
 		/*
-		 * admin account cretion submit button
+		 * admin account creation submit button
 		 */
-		if(source == adminBookingCreationSubmit){
-			//ADD IN SQL
+		if(source == createAccountSubmitButton){
+			System.out.print("AdminCreate Book");
 			
+			System.out.println("Create Account: " + adminAccCreateEmail.getText() + ", Password: " + adminAccCreatePassTextArea.getText() + ", Phone Number: " + adminCreatePhone.getText());
+			User user = new User(adminAccCreateEmail.getText(), adminAccCreatePassTextArea.getText(), adminCreatePhone.getText());
+			DBConnection.setUser(user);
+			DBConnection.insertUser(user);
 			crudFrame.remove(adminCreateAccountPanel);
 			crudFrame.add(crudPanel);
 			crudFrame.revalidate(); 
@@ -681,7 +724,9 @@ public class AceVenturaBarberTheFirst extends JFrame implements ActionListener{
 		 * admin account deletion
 		 */
 		if(source == deletionSubmit){
-			//ADD in sql
+			System.out.println("Delete Account: " + accDeletionEmailArea.getText());
+			User user = new User(accDeletionEmailArea.getText());
+			DBConnection.deleteUser(user);
 			
 			crudFrame.remove(adminAccDeletionPanel);
 			crudFrame.add(crudPanel);
@@ -704,3 +749,4 @@ public class AceVenturaBarberTheFirst extends JFrame implements ActionListener{
 	 */
 
 }
+
