@@ -1,7 +1,7 @@
 package db;
 /**
  * Ace Ventura's Detective Agency
- * @author B00076316 Liam Walsh & B00091655 Seán Scott
+ * @author B00076316 Liam Walsh & B00091655 SeÃ¡n Scott
  *
  */
 public class Booking {
@@ -118,3 +118,4 @@ public class Booking {
 		this.userID = userID;
 	}
 }
+
