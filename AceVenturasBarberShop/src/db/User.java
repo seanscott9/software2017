@@ -1,7 +1,7 @@
 package db;
 /**
  * Ace Venturas Detective Agency
- * @author B00076316 Liam Walsh & B00091655 Seán Scott
+ * @author B00076316 Liam Walsh & B00091655 SeÃ¡n Scott
  *
  */
 public class User {
@@ -27,6 +27,15 @@ public class User {
 		this.phoneNum = phoneNum;
 	}
 	
+	public User(String email, String password) {
+		this.email = email;
+		this.password = password;
+	}
+	
+	public User(String email) {
+		this.email = email;
+		
+	}
 	/**
 	 * @return checkedIn
 	 */
@@ -98,5 +107,6 @@ public class User {
 	}
 
 }
+
 
 
