@@ -1,7 +1,7 @@
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-
+import javax.swing.BoxLayout;
 import javax.swing.*;
 
 import db.Booking;
@@ -135,7 +135,7 @@ public class AceVenturaBarberTheFirst extends JFrame implements ActionListener{
 		 * Calendar Button
 		 */
 		
-		viewCalendar = new JButton("Make a Booking");
+		viewCalendar = new JButton("View Calendar");
 		viewCalendar.addActionListener(this);
 		
 		/**
@@ -150,7 +150,7 @@ public class AceVenturaBarberTheFirst extends JFrame implements ActionListener{
 		JLabel inUse0 = new JLabel(new ImageIcon("src/img/ace.jpg"));
 		JLabel inUse1 = new JLabel(new ImageIcon("src/img/ace.jpg"));
 		JLabel inUse2 = new JLabel(new ImageIcon("src/img/ace.jpg"));
-		//JLabel inUse3 = new JLabel(new ImageIcon("///E:/College/software/AceVenturasBarberShop/src/img/ace.jpg"));
+		
 
 		/**
 		 * Logo
@@ -178,24 +178,26 @@ public class AceVenturaBarberTheFirst extends JFrame implements ActionListener{
 		/**
 		 * West Panel
 		 */
-		
+		westPanel.add(timeSlotBookingButt);
 		westPanel.add(registrationButt);
 		/**
 		 * East Panel
 		 */
+			
+		eastPanel.add(viewCalendar);
+		
+		eastPanel.add(logButt);
+
 		if(isLogged == false)
 		{
 			viewCalendar.setVisible(false);
 		}
 		
-		eastPanel.add(viewCalendar);
-		
-		eastPanel.add(logButt);
-
 		frame.add(northPanel, BorderLayout.PAGE_START);
 		frame.add(eastPanel, BorderLayout.LINE_START);
 		frame.add(westPanel, BorderLayout.LINE_END);
 		frame.add(middlePanel, BorderLayout.CENTER);
+		
 		/**
 		 * END OF MAIN FRAME
 		 */
@@ -468,7 +470,7 @@ public class AceVenturaBarberTheFirst extends JFrame implements ActionListener{
 		 * START OF CREATE A BOOKING ADMIN PANEL
 		 */
 		adminBookingCreationPanel = new JPanel();
-		adminBookingCreationPanel.setLayout(new BoxLayout(adminBookingCreationPanel, BoxLayout.PAGE_AXIS));	
+		adminBookingCreationPanel.setLayout(new GridLayout(3, 2));	
 		JLabel adminLabelDay = new JLabel("Day");
 		/*
 		 * DATES HERE
@@ -480,7 +482,7 @@ public class AceVenturaBarberTheFirst extends JFrame implements ActionListener{
 		 */
 		JComboBox<String> adminTimesDropDown = new JComboBox<String> (new String[] {"9.00","10.00","11.00","12.00","13.00","14.00","15.00","16.00","17.00","18.00"});
 		adminBookingCreationSubmit = new JButton("Submit");
-
+		adminBookingCreationSubmit.addActionListener(this);
 	
 		adminBookingCreationPanel.add(adminLabelDay);
 		adminBookingCreationPanel.add(adminDatesDropDown);
@@ -495,7 +497,7 @@ public class AceVenturaBarberTheFirst extends JFrame implements ActionListener{
 		 * booking deletion admin Panel
 		 */
 		adminBookingDeletionPanel = new JPanel();
-		adminBookingDeletionPanel.setLayout(new BoxLayout(adminBookingCreationPanel, BoxLayout.PAGE_AXIS));	
+		adminBookingDeletionPanel.setLayout(new GridLayout(3, 2));	
 		JLabel adminLabelDayDEletion = new JLabel("Day");
 		/*
 		 * DATES HERE
@@ -508,13 +510,13 @@ public class AceVenturaBarberTheFirst extends JFrame implements ActionListener{
 		 */
 		adminTimesDropDownDeletion = new JComboBox<String> (new String[] {"9.00","10.00","11.00","12.00","13.00","14.00","15.00","16.00","17.00","18.00"});
 		adminBookingDeletionSubmit = new JButton("Submit");
+		adminBookingDeletionSubmit.addActionListener(this);
 
-
-		adminBookingDeletionPanel.add(adminLabelDay);
-		adminBookingDeletionPanel.add(adminDatesDropDown);
-		adminBookingDeletionPanel.add(adminLabelTimes);
-		adminBookingDeletionPanel.add(adminTimesDropDown);
-		adminBookingDeletionPanel.add(adminBookingCreationSubmit);
+		adminBookingDeletionPanel.add(adminLabelDayDEletion);
+		adminBookingDeletionPanel.add(adminDatesDropDownDeletion);
+		adminBookingDeletionPanel.add(adminLabelTimesDeletion);
+		adminBookingDeletionPanel.add(adminTimesDropDownDeletion);
+		adminBookingDeletionPanel.add(adminBookingDeletionSubmit);
 		/**
 		 * END OF BOOKING DELETION ADMIN PANEL
 		 */
@@ -625,6 +627,7 @@ public class AceVenturaBarberTheFirst extends JFrame implements ActionListener{
 			/**
 			 * Calls the setUser and insertUser and passes the parameters
 			 */
+			
 			System.out.println("Create Account: " + emailArea.getText() + ", Password: " + new String(passwordSignUpArea.getPassword()) + ", Phone Number: " + phoneTextField.getText());
 			User user = new User(emailArea.getText(), new String(passwordSignUpArea.getPassword()), phoneTextField.getText());
 			DBConnection.setUser(user);
@@ -635,12 +638,15 @@ public class AceVenturaBarberTheFirst extends JFrame implements ActionListener{
 			/**
 			 * SUBMIT BUTTON ON BOOKING PAGE
 			 */
+			
+			
 			Booking booking = new Booking(new String((String) timesDropDown.getSelectedItem()) ,new String((String) datesDropDown.getSelectedItem()));
 			DBConnection.insertBooking(booking, user);
 			System.out.println("Booking for " + (String)timesDropDown.getSelectedItem() + " on " + (String)datesDropDown.getSelectedItem());
 			calFrame.setVisible(false);
 			frame.setVisible(true);
 			
+			//////TEST MUTHAFUCKA/////////
 		}
 		/*
 		 * admin make booking
@@ -650,12 +656,15 @@ public class AceVenturaBarberTheFirst extends JFrame implements ActionListener{
 			crudFrame.add(adminBookingCreationPanel);
 			crudFrame.revalidate(); 
 			crudFrame.repaint(); 
+			
+			//System.out.println("TEST ADMIN BOOKING PAGE BUTTON");
 		}
 		/*
 		 * submit for admin booking
 		 * 
 		 */
 		if(source == adminBookingCreationSubmit){
+			
 			Booking booking = new Booking(new String((String) adminTimesDropDown.getSelectedItem()) ,new String((String) adminDatesDropDown.getSelectedItem()));
 			DBConnection.insertBooking(booking, user);
 			System.out.println("Booking for " + (String)adminTimesDropDown.getSelectedItem() + " on " + (String)adminDatesDropDown.getSelectedItem());
@@ -664,6 +673,8 @@ public class AceVenturaBarberTheFirst extends JFrame implements ActionListener{
 			crudFrame.add(crudPanel);
 			crudFrame.revalidate(); 
 			crudFrame.repaint(); 
+			//System.out.println("TEST ADMIN CREATE BOOKING SUBMIT");
+			
 		}
 		/*
 		 * admin delete booking panel
@@ -674,6 +685,8 @@ public class AceVenturaBarberTheFirst extends JFrame implements ActionListener{
 			crudFrame.add(adminBookingDeletionPanel);
 			crudFrame.revalidate(); 
 			crudFrame.repaint(); 
+			
+			//System.out.println("TEST ADMIN BOOKIN DELETE PAGE BUTTON");
 		}
 		/*
 		 * admin booking delete submit button
@@ -682,10 +695,13 @@ public class AceVenturaBarberTheFirst extends JFrame implements ActionListener{
 			
 			Booking booking = new Booking(new String((String) adminTimesDropDownDeletion.getSelectedItem()) ,new String((String) adminDatesDropDownDeletion.getSelectedItem()));
 			DBConnection.deleteBooking(booking, user);
+			
 			crudFrame.remove(adminBookingDeletionPanel);
 			crudFrame.add(crudPanel);
 			crudFrame.revalidate(); 
 			crudFrame.repaint(); 
+			
+			//System.out.println("TEST ADMIN BOOKING DELETE SUBMIT BUTTON");
 		}
 		/*
 		 * admin account create account
@@ -695,21 +711,26 @@ public class AceVenturaBarberTheFirst extends JFrame implements ActionListener{
 			crudFrame.add(adminCreateAccountPanel);
 			crudFrame.revalidate(); 
 			crudFrame.repaint(); 
+			
+			//System.out.println("TEST ADMIN CREATE ACCOUNT PAGE");
 		}
 		/*
 		 * admin account creation submit button
 		 */
 		if(source == createAccountSubmitButton){
-			System.out.print("AdminCreate Book");
+			
 			
 			System.out.println("Create Account: " + adminAccCreateEmail.getText() + ", Password: " + adminAccCreatePassTextArea.getText() + ", Phone Number: " + adminCreatePhone.getText());
 			User user = new User(adminAccCreateEmail.getText(), adminAccCreatePassTextArea.getText(), adminCreatePhone.getText());
 			DBConnection.setUser(user);
 			DBConnection.insertUser(user);
+			
 			crudFrame.remove(adminCreateAccountPanel);
 			crudFrame.add(crudPanel);
 			crudFrame.revalidate(); 
 			crudFrame.repaint(); 
+			
+			//System.out.println("TEST ADMIN CREATE ACCOUNT SUBMIT BUTTON");
 		}
 		/*
 		 * admin delete account panel
@@ -719,11 +740,14 @@ public class AceVenturaBarberTheFirst extends JFrame implements ActionListener{
 			crudFrame.add(adminAccDeletionPanel);
 			crudFrame.revalidate(); 
 			crudFrame.repaint(); 
+			
+			//System.out.println("TEST ADMIN ACCOUNT DELETION PAGE BUTTON");
 		}
 		/*
 		 * admin account deletion
 		 */
 		if(source == deletionSubmit){
+			
 			System.out.println("Delete Account: " + accDeletionEmailArea.getText());
 			User user = new User(accDeletionEmailArea.getText());
 			DBConnection.deleteUser(user);
@@ -732,6 +756,8 @@ public class AceVenturaBarberTheFirst extends JFrame implements ActionListener{
 			crudFrame.add(crudPanel);
 			crudFrame.revalidate(); 
 			crudFrame.repaint();
+			
+			//System.out.println("TEST DELETE SUBMIT");
 		}
 
 
