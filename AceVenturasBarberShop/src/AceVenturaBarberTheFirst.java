@@ -544,13 +544,15 @@ public class AceVenturaBarberTheFirst extends JFrame implements ActionListener{
 		 * TimeSlot Panel Button Action
 		 */
 		if(source==timeSlotBookingButt){
-			System.out.println("Test booking button");
+			//System.out.println("Test booking button");
+			frame.setVisible(false);
+			loginFrame.setVisible(true);
 		}
 		/**
 		 * Registration Panel Button Action
 		 */
 		if(source == registrationButt){
-			System.out.println("Test registration button");
+			//System.out.println("Test registration button");
 			/**
 			 * Changes the visible frame
 			 */
