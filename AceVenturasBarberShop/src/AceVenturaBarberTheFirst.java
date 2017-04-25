@@ -39,6 +39,8 @@ public class AceVenturaBarberTheFirst extends JFrame implements ActionListener{
 	 */
 	JFrame calFrame;
 	JButton homeButt;
+	JButton homeButt1;
+	JButton homeButt2;
 	JLabel bannerLabel;
 	JButton logoutButt;
 	JButton makeBooking;
@@ -208,8 +210,8 @@ public class AceVenturaBarberTheFirst extends JFrame implements ActionListener{
 		/**
 		 * Home Button
 		 */
-		homeButt = new JButton("Home");
-		homeButt.addActionListener(this);
+		homeButt1 = new JButton("Home");
+		homeButt1.addActionListener(this);
 		/**
 		 * Logout Button
 		 */
@@ -218,7 +220,7 @@ public class AceVenturaBarberTheFirst extends JFrame implements ActionListener{
 		logoutButt.addActionListener(this);
 		JPanel panelTop =new JPanel();
 		panelTop.setLayout(new GridLayout(1,3));
-		panelTop.add(homeButt);
+		panelTop.add(homeButt1);
 		panelTop.add(bannerLabel);
 		panelTop.add(logoutButt);
 
@@ -277,8 +279,8 @@ public class AceVenturaBarberTheFirst extends JFrame implements ActionListener{
 		/**
 		 * Home Button
 		 */
-		JButton homeButton = new JButton("Home");
-		homeButton.addActionListener(this);
+		homeButt = new JButton("Home");
+		homeButt.addActionListener(this);
 		/**
 		 * Login Button
 		 */
@@ -287,6 +289,7 @@ public class AceVenturaBarberTheFirst extends JFrame implements ActionListener{
 
 		JPanel loginPanel = new JPanel();
 		loginPanel.add(loginButt);
+		loginPanel.add(homeButt);
 
 		LoginBannerPanel.add(loginBanner);
 		LoginBannerPanel.add(loginButt); 
@@ -317,8 +320,8 @@ public class AceVenturaBarberTheFirst extends JFrame implements ActionListener{
 		/**
 		 * Home Button
 		 */
-		homeButt = new JButton("HOME");
-		homeButt.addActionListener(this);
+		homeButt2 = new JButton("HOME");
+		homeButt2.addActionListener(this);
 		/**
 		 * Email Field
 		 */
@@ -360,6 +363,7 @@ public class AceVenturaBarberTheFirst extends JFrame implements ActionListener{
 		signupFrame.setVisible(false);
 		signupFrame.add(signUpBannerPanel, BorderLayout.PAGE_START);
 		signupFrame.add(signUpInputs, BorderLayout.CENTER);
+		signupFrame.add(homeButt2, BorderLayout.PAGE_END);
 		signupFrame.add(signupButt, BorderLayout.PAGE_END);
 		/**
 		 * END OF SIGNUP FRAME
@@ -369,6 +373,7 @@ public class AceVenturaBarberTheFirst extends JFrame implements ActionListener{
 		 * START OF CRUD HOME DISPLAY		
 		 */
 		crudFrame = new JFrame();
+		@SuppressWarnings("unused")
 		JButton logout = new JButton(); ///REMEMBER TO IMPLEMENT
 		JLabel crudHeading = new JLabel("ADMIN");
 		adminBooking = new JButton("Create new Booking");//GOES TO BOOKING CREATION GUI
@@ -535,6 +540,9 @@ public class AceVenturaBarberTheFirst extends JFrame implements ActionListener{
 
 
 	@Override
+	/**
+	 * ActionListeners for the Buttons
+	 */
 	public void actionPerformed(ActionEvent e) {
 		/**
 		 * Get source of ActionListener
@@ -584,7 +592,7 @@ public class AceVenturaBarberTheFirst extends JFrame implements ActionListener{
 		 */
 		if(source == loginButt){
 			/**
-			 * Calls the DBConnection LogIn and passes the varibles
+			 * Calls the DBConnection LogIn and passes the variables
 			 */
 			
 				System.out.println("Login: " + usrName.getText() + ", Password: " + pwd.getText());
@@ -602,7 +610,9 @@ public class AceVenturaBarberTheFirst extends JFrame implements ActionListener{
 				}
 			
 			 
-			//if logged as admin goes straigth to admin mode
+			/**
+			 * If it is an Admin it Auto goes to Admin Panel
+			 */
 				if(user != null && isAdmin == true)
 				{
 					loginFrame.setVisible(false);
@@ -615,11 +625,40 @@ public class AceVenturaBarberTheFirst extends JFrame implements ActionListener{
 		/**
 		 * Home Button Action
 		 */
+		if(source == homeButt1){
+			/**
+			 * Change the visible frame
+			 */
+			System.out.println("Home Button Used");
+			calFrame.setVisible(false);
+			signupFrame.setVisible(false);
+			loginFrame.setVisible(false);
+			frame.setVisible(true);
+		}
+		/**
+		 * Home Button Action
+		 */
 		if(source == homeButt){
 			/**
 			 * Change the visible frame
 			 */
+			System.out.println("Home Button Used");
 			calFrame.setVisible(false);
+			signupFrame.setVisible(false);
+			loginFrame.setVisible(false);
+			frame.setVisible(true);
+		}
+		/**
+		 * Home Button Action
+		 */
+		if(source == homeButt2){
+			/**
+			 * Change the visible frame
+			 */
+			System.out.println("Home Button Used");
+			calFrame.setVisible(false);
+			signupFrame.setVisible(false);
+			loginFrame.setVisible(false);
 			frame.setVisible(true);
 		}
 		/**
@@ -648,9 +687,9 @@ public class AceVenturaBarberTheFirst extends JFrame implements ActionListener{
 			calFrame.setVisible(false);
 			frame.setVisible(true);
 			
-			//////TEST MUTHAFUCKA/////////
+			
 		}
-		/*
+		/**
 		 * admin make booking
 		 */
 		if(source == adminBooking){
@@ -659,9 +698,9 @@ public class AceVenturaBarberTheFirst extends JFrame implements ActionListener{
 			crudFrame.revalidate(); 
 			crudFrame.repaint(); 
 			
-			//System.out.println("TEST ADMIN BOOKING PAGE BUTTON");
+			
 		}
-		/*
+		/**
 		 * submit for admin booking
 		 * 
 		 */
@@ -675,10 +714,10 @@ public class AceVenturaBarberTheFirst extends JFrame implements ActionListener{
 			crudFrame.add(crudPanel);
 			crudFrame.revalidate(); 
 			crudFrame.repaint(); 
-			//System.out.println("TEST ADMIN CREATE BOOKING SUBMIT");
+			
 			
 		}
-		/*
+		/**
 		 * admin delete booking panel
 		 */
 		if(source == adminBookingDelete){
@@ -690,7 +729,7 @@ public class AceVenturaBarberTheFirst extends JFrame implements ActionListener{
 			
 			//System.out.println("TEST ADMIN BOOKIN DELETE PAGE BUTTON");
 		}
-		/*
+		/**
 		 * admin booking delete submit button
 		 */
 		if(source == adminBookingDeletionSubmit){
@@ -705,7 +744,7 @@ public class AceVenturaBarberTheFirst extends JFrame implements ActionListener{
 			
 			//System.out.println("TEST ADMIN BOOKING DELETE SUBMIT BUTTON");
 		}
-		/*
+		/**
 		 * admin account create account
 		 */
 		if(source == adminAccountCreate){
@@ -716,7 +755,7 @@ public class AceVenturaBarberTheFirst extends JFrame implements ActionListener{
 			
 			//System.out.println("TEST ADMIN CREATE ACCOUNT PAGE");
 		}
-		/*
+		/**
 		 * admin account creation submit button
 		 */
 		if(source == createAccountSubmitButton){
@@ -734,7 +773,7 @@ public class AceVenturaBarberTheFirst extends JFrame implements ActionListener{
 			
 			//System.out.println("TEST ADMIN CREATE ACCOUNT SUBMIT BUTTON");
 		}
-		/*
+		/**
 		 * admin delete account panel
 		 */
 		if(source == adminAccountDelete){
@@ -745,7 +784,7 @@ public class AceVenturaBarberTheFirst extends JFrame implements ActionListener{
 			
 			//System.out.println("TEST ADMIN ACCOUNT DELETION PAGE BUTTON");
 		}
-		/*
+		/**
 		 * admin account deletion
 		 */
 		if(source == deletionSubmit){
