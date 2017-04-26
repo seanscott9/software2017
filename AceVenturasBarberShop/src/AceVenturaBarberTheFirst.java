@@ -1,7 +1,7 @@
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import javax.swing.BoxLayout;
+
 import javax.swing.*;
 
 import db.Booking;
@@ -98,9 +98,6 @@ public class AceVenturaBarberTheFirst extends JFrame implements ActionListener{
 		 * Main frame
 		 */
 		frame = new JFrame();
-		/**
-		 * Top panel for seats in use (NYI)
-		 */
 		JPanel northPanel = new JPanel();
 		northPanel.setLayout(new FlowLayout());
 		/**
@@ -111,11 +108,13 @@ public class AceVenturaBarberTheFirst extends JFrame implements ActionListener{
 		 * Left Panel for Buttons
 		 */
 		JPanel westPanel = new JPanel();
+		westPanel.setMaximumSize(new Dimension(101, 23));
 		westPanel.setLayout(new GridLayout(2,1));
 		/**
 		 * Right Panel
 		 */
 		JPanel eastPanel = new JPanel();
+		eastPanel.setMaximumSize(new Dimension(101, 23));
 		eastPanel.setLayout(new GridLayout(2,1));
 
 
@@ -126,24 +125,40 @@ public class AceVenturaBarberTheFirst extends JFrame implements ActionListener{
 		/**
 		 * TimeSlot Button
 		 */
-		timeSlotBookingButt = new JButton("Book a Timeslot");
+		timeSlotBookingButt = new JButton("<html>Book <br> a <br> Timeslot</html>");
+		timeSlotBookingButt.setSize(101, 23);
+		timeSlotBookingButt.setFont(new Font("Segoe UI", Font.BOLD, 13));
+		timeSlotBookingButt.setForeground(new Color(0, 0, 255));
 		timeSlotBookingButt.addActionListener(this);
 		/**
 		 * Registration Button
 		 */
-		registrationButt = new JButton("Registration Form");
+		registrationButt = new JButton("Registration");
+		registrationButt.setSize(101, 23);
+		registrationButt.setFont(new Font("Segoe UI", Font.BOLD, 13));
+		registrationButt.setForeground(new Color(0, 0, 255));
 		registrationButt.addActionListener(this);
 		/**
 		 * Calendar Button
 		 */
 		
-		viewCalendar = new JButton("View Calendar");
+		viewCalendar = new JButton("<html>View<br> Calendar");
+		
+		viewCalendar.setMinimumSize(new Dimension(101, 23));
+		viewCalendar.setFont(new Font("Segoe UI", Font.BOLD, 13));
+		viewCalendar.setForeground(new Color(0, 0, 255));
+		viewCalendar.setPreferredSize(new Dimension(101, 23));
 		viewCalendar.addActionListener(this);
 		
 		/**
 		 * Login Button
 		 */
 		logButt = new JButton("Login");
+		logButt.setAlignmentX(Component.CENTER_ALIGNMENT);
+		
+		logButt.setFont(new Font("Segoe UI", Font.BOLD, 13));
+		logButt.setForeground(new Color(0, 0, 255));
+		logButt.setSize(101, 23);
 		logButt.addActionListener(this);
 
 		/**
@@ -158,6 +173,7 @@ public class AceVenturaBarberTheFirst extends JFrame implements ActionListener{
 		 * Logo
 		 */
 		JLabel logo = new JLabel(new ImageIcon("src/img/barber.jpeg"));
+		logo.setAlignmentX(Component.CENTER_ALIGNMENT);
 
 		/**
 		 * Setting main frame as Visible
