@@ -216,12 +216,13 @@ public class AceVenturaBarberTheFirst extends JFrame implements ActionListener{
 
 		eastPanel.add(logButt);
 
-		if(isLogged == false)
+		if(isLogged == true)
 		{
 			viewCalendar.setVisible(false);
-			timeSlotBookingButt.setVisible(false);
+			timeSlotBookingButt.setVisible(true);
 		}
-
+		
+		timeSlotBookingButt.setVisible(false);
 		viewCalendar.setVisible(false);
 		//add all elements to panel
 		
@@ -415,8 +416,8 @@ public class AceVenturaBarberTheFirst extends JFrame implements ActionListener{
 		crudFrame.setLayout(new BorderLayout(0, 0));
 
 
-		crudFrame.add(adminHeadingPanel, BorderLayout.NORTH);
-		crudFrame.add(adminButtonsPanel, BorderLayout.CENTER);
+		crudPanel.add(adminHeadingPanel, BorderLayout.NORTH);
+		crudPanel.add(adminButtonsPanel, BorderLayout.CENTER);
 		GroupLayout gl_adminButtonsPanel = new GroupLayout(adminButtonsPanel);
 		gl_adminButtonsPanel.setHorizontalGroup(
 			gl_adminButtonsPanel.createParallelGroup(Alignment.LEADING)
@@ -481,6 +482,7 @@ public class AceVenturaBarberTheFirst extends JFrame implements ActionListener{
 		createAccountSubmitButton = new JButton("Submit");
 		createAccountSubmitButton.setForeground(Color.BLUE);
 		createAccountSubmitButton.setFont(new Font("Segoe UI", Font.PLAIN, 12));
+		createAccountSubmitButton.addActionListener(this);
 		
 		adminAccCreatePassTextArea = new JPasswordField();
 		adminAccCreatePassTextArea.setBackground(Color.WHITE);
@@ -553,7 +555,7 @@ public class AceVenturaBarberTheFirst extends JFrame implements ActionListener{
 		 * START OF ACCOUNT DELETION ADMIN PANEL
 		 */
 		adminAccDeletionPanel = new JPanel();
-		//adminDeletionButton.addActionListener(this);
+		
 		JLabel accDeletionEmail = new JLabel("Username :");
 		/**
 		 * ACCOUNT DELETION TEXTAREA
@@ -563,12 +565,12 @@ public class AceVenturaBarberTheFirst extends JFrame implements ActionListener{
 		 * SUBMIT BUTTON
 		 */
 		deletionSubmit = new JButton("Submit");
-		//deletionSubmit.addActionListener(this);
+		deletionSubmit.addActionListener(this);
 		deletionSubmit.setForeground(Color.BLUE);
 		deletionSubmit.setFont(new Font("Segoe UI", Font.BOLD, 13));
 		
 		AdminDeletionHomeButton = new JButton("Home");
-		AdminBookingDeletionHome.addActionListener(this);
+		AdminDeletionHomeButton.addActionListener(this);
 		AdminDeletionHomeButton.setForeground(Color.BLUE);
 		AdminDeletionHomeButton.setFont(new Font("Segoe UI", Font.BOLD, 13));
 		GroupLayout gl_adminAccDeletionPanel = new GroupLayout(adminAccDeletionPanel);
@@ -641,6 +643,7 @@ public class AceVenturaBarberTheFirst extends JFrame implements ActionListener{
 		adminBookingCreationSubmit = new JButton("Submit");
 		adminBookingCreationSubmit.setForeground(Color.BLUE);
 		adminBookingCreationSubmit.setFont(new Font("Segoe UI", Font.BOLD, 13));
+		adminBookingCreationSubmit.addActionListener(this);
 		
 		adminBookingCreationHomeButton = new JButton("Home");
 		adminBookingCreationHomeButton.setFont(new Font("Segoe UI", Font.BOLD, 13));
@@ -696,7 +699,7 @@ public class AceVenturaBarberTheFirst extends JFrame implements ActionListener{
 		 * booking deletion admin Panel
 		 */
 		
-		AdminBookingDeletionHome = new JButton(); 
+		
 		String cats = new String("cats");
 		adminBookingDeletionPanel = new JPanel();
 		JLabel adminLabelDayDEletion = new JLabel("Day :");
@@ -722,24 +725,26 @@ public class AceVenturaBarberTheFirst extends JFrame implements ActionListener{
 		 */
 		//adminTimesDropDownDeletion = new JComboBox<String> (new String[] {"9.00","10.00","11.00","12.00","13.00","14.00","15.00","16.00","17.00","18.00"});
 		adminTimesDropDownDeletion = new JComboBox<String>();
-		adminTimesDropDown.addItem("9.00");
-		adminTimesDropDown.addItem("10.00");
-		adminTimesDropDown.addItem("11.00");
-		adminTimesDropDown.addItem("12.00");
-		adminTimesDropDown.addItem("13.00");
-		adminTimesDropDown.addItem("14.00");
-		adminTimesDropDown.addItem("15.00");
-		adminTimesDropDown.addItem("16.00");
-		adminTimesDropDown.addItem("17.00");
-		adminTimesDropDown.addItem("18.00");
+		adminTimesDropDownDeletion.addItem("9.00");
+		adminTimesDropDownDeletion.addItem("10.00");
+		adminTimesDropDownDeletion.addItem("11.00");
+		adminTimesDropDownDeletion.addItem("12.00");
+		adminTimesDropDownDeletion.addItem("13.00");
+		adminTimesDropDownDeletion.addItem("14.00");
+		adminTimesDropDownDeletion.addItem("15.00");
+		adminTimesDropDownDeletion.addItem("16.00");
+		adminTimesDropDownDeletion.addItem("17.00");
+		adminTimesDropDownDeletion.addItem("18.00");
 		
 		adminBookingDeletionSubmit = new JButton("Submit");
 		adminBookingDeletionSubmit.setFont(new Font("Segoe UI", Font.BOLD, 13));
 		adminBookingDeletionSubmit.setForeground(Color.BLUE);
+		adminBookingDeletionSubmit.addActionListener(this);
 		
 		AdminBookingDeletionHome = new JButton("Home");
 		AdminBookingDeletionHome.setForeground(Color.BLUE);
 		AdminBookingDeletionHome.setFont(new Font("Segoe UI", Font.BOLD, 13));
+		AdminBookingDeletionHome.addActionListener(this);
 		GroupLayout gl_adminBookingDeletionPanel = new GroupLayout(adminBookingDeletionPanel);
 		gl_adminBookingDeletionPanel.setHorizontalGroup(
 			gl_adminBookingDeletionPanel.createParallelGroup(Alignment.LEADING)
@@ -868,88 +873,75 @@ public class AceVenturaBarberTheFirst extends JFrame implements ActionListener{
 
 			System.out.println("Login: " + usrName.getText() + ", Password: " + pwd.getText());
 			user = DBConnection.logIn(usrName.getText(), pwd.getText());
-			boolean isAdmin = DBConnection.isAdmin(user);
-			if(user != null && isAdmin == false) 
+			
+			if(user != null) 
 			{
+				isAdmin = DBConnection.isAdmin(user);
 				System.out.println("Login userID: " + user.getUserID());
 				DBConnection.setUser(user);
-				frame.add(loginFrame);
-				repaint();
-				revalidate();
-				isLogged = true;
-
-
+				if(isAdmin == false)
+				{
+					frame.remove(loginFrame);
+					frame.add(mainPanel);
+					repaint();
+					revalidate();
+					isLogged = true;
+					timeSlotBookingButt.setVisible(true);
+					usrName.setText("");
+					pwd.setText("");
+				}
+				else if(isAdmin ==true)
+				{		
+						frame.remove(loginFrame);
+						frame.add(crudFrame);
+						repaint();
+						revalidate();
+						isLogged = true;
+						usrName.setText("");
+						pwd.setText("");
+				}
+			}
+			else
+			{
+				usrName.setText("");
+				pwd.setText("");
 			}
 
 
 			/**
 			 * If it is an Admin it Auto goes to Admin Panel
 			 */
-			if(user != null && isAdmin == true)
-			{
-				frame.add(loginFrame);
-				repaint();
-				revalidate();
-				isLogged = true;
-			}
+			
 
 		}
 		/**
 		 * Home Button Action
 		 */
-		if(source == homeButt1 || source == homeButtonAdminCreateAcc || source == adminDeletionButton || source == AdminBookingDeletionHome ||  source == adminBookingCreationHomeButton || source == btnNewButton  ){
-			
-			/**
-			 * Change the visible frame
-			 */
-			System.out.println("Home Button Used");
-			/*
-			calFrame.setVisible(false);
-			signupFrame.setVisible(false);
-			loginFrame.setVisible(false);
-			frame.setVisible(true);
-			*/
-			frame.remove(signupFrame);
-			frame.add(mainPanel);
-			frame.revalidate(); 
-			frame.repaint(); 
-			mainPanel.setVisible(true);
-			
-		}
-		/**
-		 * Home Button Action
-		 */
-		if(source == homeButt){
-			/**
-			 * Change the visible frame
-			 */
-			System.out.println("Home Button Used");
+		if(source == homeButt)
+		{
+			System.out.println("Home button from Login");
 			frame.remove(loginFrame);
 			frame.add(mainPanel);
-			frame.revalidate(); 
-			frame.repaint(); 
-			mainPanel.setVisible(true);
+			frame.revalidate();
+			frame.repaint();
 			
-			/*calFrame.setVisible(false);
-			signupFrame.setVisible(false);
-			loginFrame.setVisible(false);
-			frame.setVisible(true);
-			*/
 		}
-		/**
-		 * Home Button Action
-		 */
-		if(source == homeButt2){
+		
+		if(source == homeButt2)
+		{
+			System.out.println("Somewhere to home");
+			frame.remove(signupFrame);
+			frame.add(mainPanel);
+			frame.revalidate();
+			frame.repaint();
+		}
+		if(source == homeButt1){
+			
 			/**
 			 * Change the visible frame
 			 */
 			System.out.println("Home Button Used");
-			/*
-			calFrame.setVisible(false);
-			signupFrame.setVisible(false);
-			loginFrame.setVisible(false);
-			frame.setVisible(true);
-			*/
+			
 			frame.remove(signupFrame);
 			frame.add(mainPanel);
 			frame.revalidate(); 
@@ -957,6 +949,68 @@ public class AceVenturaBarberTheFirst extends JFrame implements ActionListener{
 			mainPanel.setVisible(true);
 			
 		}
+		
+		if(source == homeButtonAdminCreateAcc)
+		{
+			System.out.println("adminCreate home butt");
+			crudFrame.remove(adminCreateAccountPanel);
+			crudFrame.add(crudPanel);
+			crudFrame.revalidate(); 
+			crudFrame.repaint();
+			
+		}
+		
+		if(source == AdminDeletionHomeButton)
+		{
+			System.out.println("admin Delete Button home");
+			crudFrame.remove(adminAccDeletionPanel);
+			crudFrame.add(crudPanel);
+			crudFrame.revalidate(); 
+			crudFrame.repaint();
+			
+		}
+		
+		if(source == AdminBookingDeletionHome)
+		{
+			System.out.println("admin book delete home");
+			crudFrame.remove(adminBookingDeletionPanel);
+			crudFrame.add(crudPanel);
+			crudFrame.revalidate(); 
+			crudFrame.repaint();
+		}
+		
+		if(source == adminBookingCreationHomeButton)
+		{
+			if (isAdmin == true)
+			{
+				System.out.println("admin book create home");
+				crudFrame.remove(adminBookingCreationPanel);
+				crudFrame.add(crudPanel);
+				crudFrame.revalidate();
+				crudFrame.repaint();
+				//crudFrame.setVisible(true);
+			}
+			else
+			{
+				System.out.println("WHY ARE YOU RUNNING");
+				frame.remove(adminBookingCreationPanel);
+				frame.add(mainPanel);
+				frame.revalidate();
+				frame.repaint();
+			}
+		}
+		
+		if(source == btnNewButton)
+		{
+			System.out.println("admin create account panel");
+			crudFrame.remove(adminCreateAccountPanel);
+			crudFrame.add(crudPanel);
+			crudFrame.revalidate();
+			crudFrame.repaint();
+			
+		}
+		
+		
 		/**
 		 * Signup Button Action
 		 */
@@ -970,6 +1024,10 @@ public class AceVenturaBarberTheFirst extends JFrame implements ActionListener{
 			DBConnection.setUser(user);
 			DBConnection.insertUser(user);
 			
+			isLogged = true;
+			timeSlotBookingButt.setVisible(true);
+			
+			
 			frame.remove(signupFrame);
 			frame.add(mainPanel);
 			frame.revalidate(); 
@@ -977,17 +1035,16 @@ public class AceVenturaBarberTheFirst extends JFrame implements ActionListener{
 			mainPanel.setVisible(true);
 			
 		}
-		if(source == makeBooking){
+		if(source == adminBookingCreationSubmit){
 			/**
 			 * SUBMIT BUTTON ON BOOKING PAGE
 			 */
 
 
-			Booking booking = new Booking(new String((String) timesDropDown.getSelectedItem()) ,new String((String) datesDropDown.getSelectedItem()));
+			Booking booking = new Booking(new String((String) adminTimesDropDown.getSelectedItem()) ,new String((String) adminDatesDropDown.getSelectedItem()));
 			DBConnection.insertBooking(booking, user);
-			System.out.println("Booking for " + (String)timesDropDown.getSelectedItem() + " on " + (String)datesDropDown.getSelectedItem());
-			calFrame.setVisible(false);
-			frame.setVisible(true);
+			System.out.println("Booking for " + (String)adminTimesDropDown.getSelectedItem() + " on " + (String)adminDatesDropDown.getSelectedItem());
+			//frame.setVisible(true);
 
 
 		}
@@ -1036,15 +1093,16 @@ public class AceVenturaBarberTheFirst extends JFrame implements ActionListener{
 		 */
 		if(source == adminBookingDeletionSubmit){
 
+			System.out.println("TEST ADMIN BOOKING DELETE SUBMIT BUTTON");
 			Booking booking = new Booking(new String((String) adminTimesDropDownDeletion.getSelectedItem()) ,new String((String) adminDatesDropDownDeletion.getSelectedItem()));
-			DBConnection.deleteBooking(booking, user);
+			DBConnection.deleteBooking(booking);
 
 			crudFrame.remove(adminBookingDeletionPanel);
 			crudFrame.add(crudPanel);
 			crudFrame.revalidate(); 
 			crudFrame.repaint(); 
 
-			//System.out.println("TEST ADMIN BOOKING DELETE SUBMIT BUTTON");
+			
 		}
 		/**
 		 * admin account create account
@@ -1062,9 +1120,9 @@ public class AceVenturaBarberTheFirst extends JFrame implements ActionListener{
 		 */
 		if(source == createAccountSubmitButton){
 
-
-			System.out.println("Create Account: " + adminAccCreateEmail.getText() + ", Password: " + adminAccCreatePassTextArea.getText() + ", Phone Number: " + adminCreatePhone.getText());
-			User user = new User(adminAccCreateEmail.getText(), adminAccCreatePassTextArea.getText(), adminCreatePhone.getText());
+//FIX!!!!
+			System.out.println("Create Account: " + adminAccCreateEmail.getText() + ", Password: " + new String(adminAccCreatePassTextArea.getPassword()) + ", Phone Number: " + adminCreatePhone.getText());
+			User user = new User(adminAccCreateEmail.getText(), new String(adminAccCreatePassTextArea.getPassword()), adminCreatePhone.getText());
 			DBConnection.setUser(user);
 			DBConnection.insertUser(user);
 
