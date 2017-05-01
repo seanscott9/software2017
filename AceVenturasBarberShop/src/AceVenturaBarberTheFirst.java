@@ -29,6 +29,7 @@ public class AceVenturaBarberTheFirst extends JFrame implements ActionListener{
 	/**
 	 * Home window Frame and Buttons
 	 */
+	JPanel mainPanel;
 	JFrame frame;
 	JButton timeSlotBookingButt;
 	JButton registrationButt;
@@ -52,7 +53,6 @@ public class AceVenturaBarberTheFirst extends JFrame implements ActionListener{
 	 * Login Frame and Buttons
 	 */
 	JPanel loginFrame;
-	JPanel loginMainPanel;
 	JTextField pwd;
 	JTextField usrName;
 	/**
@@ -88,7 +88,7 @@ public class AceVenturaBarberTheFirst extends JFrame implements ActionListener{
 	JButton deletionSubmit;//admin account deletion submit button
 	JComboBox<String> adminDatesDropDownDeletion;
 	JComboBox<String> adminTimesDropDownDeletion;
-	JTextArea accDeletionEmailArea;
+	JTextField accDeletionEmailArea;
 	JComboBox<String> adminDatesDropDown;
 	JComboBox<String> adminTimesDropDown;
 
@@ -211,13 +211,19 @@ public class AceVenturaBarberTheFirst extends JFrame implements ActionListener{
 		if(isLogged == false)
 		{
 			viewCalendar.setVisible(false);
+			timeSlotBookingButt.setVisible(false);
 		}
 
-		frame.add(northPanel, BorderLayout.PAGE_START);
-		frame.add(eastPanel, BorderLayout.LINE_START);
-		frame.add(westPanel, BorderLayout.LINE_END);
-		frame.add(middlePanel, BorderLayout.CENTER);
-
+		viewCalendar.setVisible(false);
+		//add all elements to panel
+		
+		mainPanel  = new JPanel();
+		mainPanel.setLayout(new BorderLayout(0, 0));
+		mainPanel.add(northPanel, BorderLayout.NORTH);
+		mainPanel.add(eastPanel, BorderLayout.EAST);
+		mainPanel.add(westPanel, BorderLayout.WEST);
+		mainPanel.add(middlePanel, BorderLayout.CENTER);
+		frame.getContentPane().add(mainPanel);
 		/**
 		 * END OF MAIN FRAME
 		 */
@@ -241,6 +247,8 @@ public class AceVenturaBarberTheFirst extends JFrame implements ActionListener{
 		 */
 		JPanel LoginBannerPanel = new JPanel();
 		JLabel loginBanner = new JLabel("Login");
+		
+		loginBanner.setFont(new Font("Segoe UI", Font.BOLD, 13));
 		JPanel loginMiddlePanel = new JPanel();
 		JPanel usrnamePanel = new JPanel();
 		/**
@@ -254,7 +262,7 @@ public class AceVenturaBarberTheFirst extends JFrame implements ActionListener{
 		/**
 		 * Home Button
 		 */
-		homeButt = new JButton("Home");
+		homeButt = new JButton("Home");//FIX
 		homeButt.addActionListener(this);
 		/**
 		 * Login Button
@@ -265,9 +273,13 @@ public class AceVenturaBarberTheFirst extends JFrame implements ActionListener{
 		JPanel loginPanel = new JPanel();
 		loginPanel.add(loginButt);
 		loginPanel.add(homeButt);
-
+		loginButt.setForeground(Color.BLUE);
+		loginButt.setFont(new Font("Segoe UI", Font.BOLD, 13));
+		homeButt.setForeground(Color.BLUE);
+		homeButt.setFont(new Font("Segoe UI", Font.BOLD, 13));
+		
 		LoginBannerPanel.add(loginBanner);
-		LoginBannerPanel.add(loginButt); 
+		//LoginBannerPanel.add(loginButt); 
 		usrnamePanel.add(usrNameLabel);
 		usrnamePanel.add(usrName);
 		pwdPanel.add(pwdLabel);
@@ -275,7 +287,7 @@ public class AceVenturaBarberTheFirst extends JFrame implements ActionListener{
 		loginMiddlePanel.setLayout(new GridLayout(2,1));
 		loginMiddlePanel.add(usrnamePanel);//to arrange inputs
 		loginMiddlePanel.add(pwdPanel);
-
+		
 		loginFrame = new JPanel();
 		loginFrame.setSize(500, 500);
 		loginFrame.setVisible(false);
@@ -300,7 +312,7 @@ public class AceVenturaBarberTheFirst extends JFrame implements ActionListener{
 		homeButt2 = new JButton("Home");
 		homeButt2.setForeground(Color.BLUE);
 		homeButt2.setFont(new Font("Segoe UI", Font.BOLD, 13));
-		//homeButt2.addActionListener(this);
+		homeButt2.addActionListener(this);
 		/**
 		 * Email Field
 		 */
@@ -316,7 +328,7 @@ public class AceVenturaBarberTheFirst extends JFrame implements ActionListener{
 		signupButt = new JButton("Submit");
 		signupButt.setForeground(Color.BLUE);
 		signupButt.setFont(new Font("Segoe UI", Font.BOLD, 13));
-		//signupButt.addActionListener(this);
+		signupButt.addActionListener(this);
 
 		signUpBannerPanel.add(signUpLabel);
 
@@ -423,7 +435,7 @@ public class AceVenturaBarberTheFirst extends JFrame implements ActionListener{
 		);
 		adminButtonsPanel.setLayout(gl_adminButtonsPanel);
 		//crudPanel.add(adminSeats, BorderLayout.PAGE_END);
-		//crudFrame.add(crudPanel);
+		crudFrame.add(crudPanel);
 
 		/**
 		 * END OF CRUD HOME DISPLAY
@@ -433,7 +445,7 @@ public class AceVenturaBarberTheFirst extends JFrame implements ActionListener{
 		 * START OF CREATE ACCOUNT ADMIN PANEL	
 		 */
 		adminCreateAccountPanel = new JPanel();
-		JLabel adminAccCreationEmailLabel = new JLabel("Email :");
+		JLabel adminAccCreationEmailLabel = new JLabel("UserName :");
 		/**
 		 * Email text area
 		 */
@@ -523,21 +535,44 @@ public class AceVenturaBarberTheFirst extends JFrame implements ActionListener{
 		 * START OF ACCOUNT DELETION ADMIN PANEL
 		 */
 		adminAccDeletionPanel = new JPanel();
-		adminAccDeletionPanel.setLayout(new BoxLayout(adminAccDeletionPanel, BoxLayout.PAGE_AXIS));	
 
-		JLabel accDeletionEmail = new JLabel("Email");
+		JLabel accDeletionEmail = new JLabel("Username :");
 		/**
 		 * ACCOUNT DELETION TEXTAREA
 		 */
-		accDeletionEmailArea = new JTextArea();
+		accDeletionEmailArea = new JTextField();
 		/**
 		 * SUBMIT BUTTON
 		 */
 		deletionSubmit = new JButton("Submit");
-		deletionSubmit.addActionListener(this);
-		adminAccDeletionPanel.add(accDeletionEmail);
-		adminAccDeletionPanel.add(accDeletionEmailArea);
-		adminAccDeletionPanel.add(deletionSubmit);	
+		deletionSubmit.setForeground(Color.BLUE);
+		deletionSubmit.setFont(new Font("Segoe UI", Font.BOLD, 13));
+		GroupLayout gl_adminAccDeletionPanel = new GroupLayout(adminAccDeletionPanel);
+		gl_adminAccDeletionPanel.setHorizontalGroup(
+			gl_adminAccDeletionPanel.createParallelGroup(Alignment.LEADING)
+				.addGroup(Alignment.TRAILING, gl_adminAccDeletionPanel.createSequentialGroup()
+					.addContainerGap(98, Short.MAX_VALUE)
+					.addComponent(accDeletionEmail)
+					.addGap(18)
+					.addComponent(accDeletionEmailArea, GroupLayout.PREFERRED_SIZE, 263, GroupLayout.PREFERRED_SIZE)
+					.addGap(28))
+				.addGroup(gl_adminAccDeletionPanel.createSequentialGroup()
+					.addGap(191)
+					.addComponent(deletionSubmit)
+					.addContainerGap(194, Short.MAX_VALUE))
+		);
+		gl_adminAccDeletionPanel.setVerticalGroup(
+			gl_adminAccDeletionPanel.createParallelGroup(Alignment.LEADING)
+				.addGroup(gl_adminAccDeletionPanel.createSequentialGroup()
+					.addGap(30)
+					.addGroup(gl_adminAccDeletionPanel.createParallelGroup(Alignment.BASELINE)
+						.addComponent(accDeletionEmailArea, GroupLayout.PREFERRED_SIZE, 26, GroupLayout.PREFERRED_SIZE)
+						.addComponent(accDeletionEmail))
+					.addGap(174)
+					.addComponent(deletionSubmit)
+					.addGap(41))
+		);
+		adminAccDeletionPanel.setLayout(gl_adminAccDeletionPanel);
 		/**
 		 * END OF ACCOUNT DELTION PANEL
 		 */
@@ -546,53 +581,163 @@ public class AceVenturaBarberTheFirst extends JFrame implements ActionListener{
 		 * START OF CREATE A BOOKING ADMIN PANEL
 		 */
 		adminBookingCreationPanel = new JPanel();
-		adminBookingCreationPanel.setLayout(new GridLayout(3, 2));	
-		JLabel adminLabelDay = new JLabel("Day");
+		JLabel adminLabelDay = new JLabel("Day :");
+		adminLabelDay.setFont(new Font("Segoe UI", Font.PLAIN, 12));
 		/*
 		 * DATES HERE
 		 */
-		adminDatesDropDown = new JComboBox<String>(new String[]{"Monday","Tuesday","Wednsday","Thursday", "Friday", "Saturday", "Sunday"});
-		JLabel adminLabelTimes = new JLabel("Times");
+		adminDatesDropDown = new JComboBox<String>();
+		adminDatesDropDown.addItem("Monday");
+		adminDatesDropDown.addItem("Tuesday");
+		adminDatesDropDown.addItem("Wednesday");
+		adminDatesDropDown.addItem("Thurday");
+		adminDatesDropDown.addItem("Friday");
+		adminDatesDropDown.addItem("Saturday");
+		adminDatesDropDown.addItem("Sunday");
+		JLabel adminLabelTimes = new JLabel("Time :");
+		adminLabelTimes.setFont(new Font("Segoe UI", Font.PLAIN, 12));
 		/*
 		 * TIMES HERE
 		 */
-		JComboBox<String> adminTimesDropDown = new JComboBox<String> (new String[] {"9.00","10.00","11.00","12.00","13.00","14.00","15.00","16.00","17.00","18.00"});
+		adminTimesDropDown = new JComboBox<String>();
+		adminTimesDropDown.addItem("9.00");
+		adminTimesDropDown.addItem("10.00");
+		adminTimesDropDown.addItem("11.00");
+		adminTimesDropDown.addItem("12.00");
+		adminTimesDropDown.addItem("13.00");
+		adminTimesDropDown.addItem("14.00");
+		adminTimesDropDown.addItem("15.00");
+		adminTimesDropDown.addItem("16.00");
+		adminTimesDropDown.addItem("17.00");
+		adminTimesDropDown.addItem("18.00");
 		adminBookingCreationSubmit = new JButton("Submit");
-		adminBookingCreationSubmit.addActionListener(this);
-
-		adminBookingCreationPanel.add(adminLabelDay);
-		adminBookingCreationPanel.add(adminDatesDropDown);
-		adminBookingCreationPanel.add(adminLabelTimes);
-		adminBookingCreationPanel.add(adminTimesDropDown);
-		adminBookingCreationPanel.add(adminBookingCreationSubmit);
+		adminBookingCreationSubmit.setForeground(Color.BLUE);
+		adminBookingCreationSubmit.setFont(new Font("Segoe UI", Font.BOLD, 13));
+		GroupLayout gl_adminBookingCreationPanel = new GroupLayout(adminBookingCreationPanel);
+		gl_adminBookingCreationPanel.setHorizontalGroup(
+			gl_adminBookingCreationPanel.createParallelGroup(Alignment.LEADING)
+				.addGroup(gl_adminBookingCreationPanel.createSequentialGroup()
+					.addGap(118)
+					.addGroup(gl_adminBookingCreationPanel.createParallelGroup(Alignment.LEADING)
+						.addGroup(gl_adminBookingCreationPanel.createSequentialGroup()
+							.addComponent(adminLabelDay, GroupLayout.PREFERRED_SIZE, 72, GroupLayout.PREFERRED_SIZE)
+							.addPreferredGap(ComponentPlacement.RELATED)
+							.addGroup(gl_adminBookingCreationPanel.createParallelGroup(Alignment.LEADING)
+								.addGroup(gl_adminBookingCreationPanel.createSequentialGroup()
+									.addComponent(adminTimesDropDown, 0, 204, Short.MAX_VALUE)
+									.addPreferredGap(ComponentPlacement.RELATED))
+								.addComponent(adminDatesDropDown, GroupLayout.PREFERRED_SIZE, 204, GroupLayout.PREFERRED_SIZE))
+							.addGap(52))
+						.addComponent(adminLabelTimes, GroupLayout.PREFERRED_SIZE, 61, GroupLayout.PREFERRED_SIZE)))
+				.addGroup(gl_adminBookingCreationPanel.createSequentialGroup()
+					.addGap(154)
+					.addComponent(adminBookingCreationSubmit, GroupLayout.DEFAULT_SIZE, 120, Short.MAX_VALUE)
+					.addGap(176))
+		);
+		gl_adminBookingCreationPanel.setVerticalGroup(
+			gl_adminBookingCreationPanel.createParallelGroup(Alignment.LEADING)
+				.addGroup(gl_adminBookingCreationPanel.createSequentialGroup()
+					.addGroup(gl_adminBookingCreationPanel.createParallelGroup(Alignment.BASELINE)
+						.addComponent(adminLabelDay, GroupLayout.PREFERRED_SIZE, 89, GroupLayout.PREFERRED_SIZE)
+						.addComponent(adminDatesDropDown, GroupLayout.PREFERRED_SIZE, 40, GroupLayout.PREFERRED_SIZE))
+					.addPreferredGap(ComponentPlacement.RELATED)
+					.addGroup(gl_adminBookingCreationPanel.createParallelGroup(Alignment.BASELINE)
+						.addComponent(adminLabelTimes, GroupLayout.PREFERRED_SIZE, 100, GroupLayout.PREFERRED_SIZE)
+						.addComponent(adminTimesDropDown, GroupLayout.PREFERRED_SIZE, 42, GroupLayout.PREFERRED_SIZE))
+					.addGap(18)
+					.addComponent(adminBookingCreationSubmit, GroupLayout.PREFERRED_SIZE, 43, GroupLayout.PREFERRED_SIZE)
+					.addGap(44))
+		);
+		adminBookingCreationPanel.setLayout(gl_adminBookingCreationPanel);
 
 		/**
 		 * END OF CREATE BOOKING ADMIN PANEL
 		 */
+		/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 		/**
 		 * booking deletion admin Panel
 		 */
+		
+		/**
+		 * booking deletion admin Panel
+		 */
+		
+		String cats = new String("cats");
 		adminBookingDeletionPanel = new JPanel();
-		adminBookingDeletionPanel.setLayout(new GridLayout(3, 2));	
-		JLabel adminLabelDayDEletion = new JLabel("Day");
+		JLabel adminLabelDayDEletion = new JLabel("Day :");
+		adminLabelDayDEletion.setFont(new Font("Segoe UI", Font.PLAIN, 12));
 		/*
 		 * DATES HERE
 		 */
 
-		adminDatesDropDownDeletion = new JComboBox<String>(new String[]{"Monday","Tuesday","Wednsday","Thursday", "Friday", "Saturday", "Sunday"});
-		JLabel adminLabelTimesDeletion = new JLabel("Times");
+		//adminDatesDropDownDeletion = new JComboBox<String>(new String[]{"Monday","Tuesday","Wednesday","Thursday", "Friday", "Saturday", "Sunday"});
+		adminDatesDropDownDeletion = new JComboBox<String>();
+		adminDatesDropDownDeletion.addItem("Monday");
+		adminDatesDropDownDeletion.addItem("Tuesday");
+		adminDatesDropDownDeletion.addItem("Wednesday");
+		adminDatesDropDownDeletion.addItem("Thursday");
+		adminDatesDropDownDeletion.addItem("Friday");
+		adminDatesDropDownDeletion.addItem("Saturday");
+		adminDatesDropDownDeletion.addItem("Sunday");
+		
+		JLabel adminLabelTimesDeletion = new JLabel("Times :");
+		adminLabelTimesDeletion.setFont(new Font("Segoe UI", Font.PLAIN, 13));
 		/*
 		 * TIMES HERE
 		 */
-		adminTimesDropDownDeletion = new JComboBox<String> (new String[] {"9.00","10.00","11.00","12.00","13.00","14.00","15.00","16.00","17.00","18.00"});
+		//adminTimesDropDownDeletion = new JComboBox<String> (new String[] {"9.00","10.00","11.00","12.00","13.00","14.00","15.00","16.00","17.00","18.00"});
+		adminTimesDropDownDeletion = new JComboBox<String>();
+		adminTimesDropDown.addItem("9.00");
+		adminTimesDropDown.addItem("10.00");
+		adminTimesDropDown.addItem("11.00");
+		adminTimesDropDown.addItem("12.00");
+		adminTimesDropDown.addItem("13.00");
+		adminTimesDropDown.addItem("14.00");
+		adminTimesDropDown.addItem("15.00");
+		adminTimesDropDown.addItem("16.00");
+		adminTimesDropDown.addItem("17.00");
+		adminTimesDropDown.addItem("18.00");
+		
 		adminBookingDeletionSubmit = new JButton("Submit");
-		adminBookingDeletionSubmit.addActionListener(this);
-
-		adminBookingDeletionPanel.add(adminLabelDayDEletion);
-		adminBookingDeletionPanel.add(adminDatesDropDownDeletion);
-		adminBookingDeletionPanel.add(adminLabelTimesDeletion);
-		adminBookingDeletionPanel.add(adminTimesDropDownDeletion);
-		adminBookingDeletionPanel.add(adminBookingDeletionSubmit);
+		adminBookingDeletionSubmit.setFont(new Font("Segoe UI", Font.BOLD, 13));
+		adminBookingDeletionSubmit.setForeground(Color.BLUE);
+		GroupLayout gl_adminBookingDeletionPanel = new GroupLayout(adminBookingDeletionPanel);
+		gl_adminBookingDeletionPanel.setHorizontalGroup(
+			gl_adminBookingDeletionPanel.createParallelGroup(Alignment.LEADING)
+				.addGroup(gl_adminBookingDeletionPanel.createSequentialGroup()
+					.addContainerGap(86, Short.MAX_VALUE)
+					.addGroup(gl_adminBookingDeletionPanel.createParallelGroup(Alignment.LEADING)
+						.addGroup(Alignment.TRAILING, gl_adminBookingDeletionPanel.createSequentialGroup()
+							.addComponent(adminLabelDayDEletion, GroupLayout.PREFERRED_SIZE, 53, GroupLayout.PREFERRED_SIZE)
+							.addGap(36))
+						.addGroup(Alignment.TRAILING, gl_adminBookingDeletionPanel.createSequentialGroup()
+							.addComponent(adminLabelTimesDeletion, GroupLayout.PREFERRED_SIZE, 46, GroupLayout.PREFERRED_SIZE)
+							.addGap(51)))
+					.addGroup(gl_adminBookingDeletionPanel.createParallelGroup(Alignment.LEADING)
+						.addComponent(adminTimesDropDownDeletion, 0, 175, Short.MAX_VALUE)
+						.addComponent(adminDatesDropDownDeletion, GroupLayout.PREFERRED_SIZE, 175, GroupLayout.PREFERRED_SIZE))
+					.addGap(92))
+				.addGroup(gl_adminBookingDeletionPanel.createSequentialGroup()
+					.addGap(147)
+					.addComponent(adminBookingDeletionSubmit, GroupLayout.PREFERRED_SIZE, 129, GroupLayout.PREFERRED_SIZE)
+					.addContainerGap(174, Short.MAX_VALUE))
+		);
+		gl_adminBookingDeletionPanel.setVerticalGroup(
+			gl_adminBookingDeletionPanel.createParallelGroup(Alignment.LEADING)
+				.addGroup(gl_adminBookingDeletionPanel.createSequentialGroup()
+					.addContainerGap()
+					.addGroup(gl_adminBookingDeletionPanel.createParallelGroup(Alignment.BASELINE)
+						.addComponent(adminDatesDropDownDeletion, GroupLayout.PREFERRED_SIZE, 37, GroupLayout.PREFERRED_SIZE)
+						.addComponent(adminLabelDayDEletion, GroupLayout.PREFERRED_SIZE, 89, GroupLayout.PREFERRED_SIZE))
+					.addPreferredGap(ComponentPlacement.RELATED)
+					.addGroup(gl_adminBookingDeletionPanel.createParallelGroup(Alignment.BASELINE)
+						.addComponent(adminTimesDropDownDeletion, GroupLayout.PREFERRED_SIZE, 33, GroupLayout.PREFERRED_SIZE)
+						.addComponent(adminLabelTimesDeletion, GroupLayout.PREFERRED_SIZE, 91, GroupLayout.PREFERRED_SIZE))
+					.addPreferredGap(ComponentPlacement.RELATED)
+					.addComponent(adminBookingDeletionSubmit, GroupLayout.PREFERRED_SIZE, 45, GroupLayout.PREFERRED_SIZE)
+					.addContainerGap(52, Short.MAX_VALUE))
+		);
+		adminBookingDeletionPanel.setLayout(gl_adminBookingDeletionPanel);
 		/**
 		 * END OF BOOKING DELETION ADMIN PANEL
 		 */
@@ -624,8 +769,12 @@ public class AceVenturaBarberTheFirst extends JFrame implements ActionListener{
 		 */
 		if(source==timeSlotBookingButt){
 			//System.out.println("Test booking button");
-			frame.setVisible(false);
-			loginFrame.setVisible(true);
+			
+			frame.remove(mainPanel);
+			frame.add(adminBookingCreationPanel);
+			frame.revalidate(); 
+			frame.repaint(); 
+			adminBookingCreationPanel.setVisible(true);
 		}
 		/**
 		 * Registration Panel Button Action
@@ -635,6 +784,7 @@ public class AceVenturaBarberTheFirst extends JFrame implements ActionListener{
 			/**
 			 * Changes the visible frame
 			 */
+			frame.remove(mainPanel);
 			frame.add(signupFrame);
 			signupFrame.setVisible(true);
 		}
@@ -645,7 +795,10 @@ public class AceVenturaBarberTheFirst extends JFrame implements ActionListener{
 			/**
 			 * Changes the visible frame
 			 */
-			frame.setVisible(false);
+			frame.remove(mainPanel);
+			frame.add(loginFrame);
+			frame.revalidate(); 
+			frame.repaint(); 
 			loginFrame.setVisible(true);
 		}
 		/**
@@ -655,8 +808,11 @@ public class AceVenturaBarberTheFirst extends JFrame implements ActionListener{
 			/**
 			 * Change the visible frame
 			 */
-			frame.setVisible(false);
-			calFrame.setVisible(true);
+			frame.remove(mainPanel);
+			frame.add(loginFrame);
+			frame.revalidate(); 
+			frame.repaint(); 
+			loginFrame.setVisible(true);
 		}
 		/**
 		 * Login Button Action
