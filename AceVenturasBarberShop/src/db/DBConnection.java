@@ -13,7 +13,7 @@ import javax.swing.JOptionPane;
 
 /**
  * Ace Ventura's Detective Agency
- * @author B00076316 Liam Walsh & B00091655 SeÃ¡n Scott
+ * @author B00076316 Liam Walsh & B00091655 SeÃƒÂ¡n Scott
  *  
  */
 public class DBConnection {
@@ -252,13 +252,13 @@ public class DBConnection {
 	 * @param booking
 	 * @param user
 	 */
-	public static void deleteBooking(Booking booking, User user){
+	public static void deleteBooking(Booking booking){
 		getConnection();
 		try{
 			// Create a statement object
 			Statement statement = connection.createStatement();
 			//Execute a Query
-			String query = "DELETE FROM booking WHERE email ='" + user.getEmail() + "';";
+			String query = "DELETE FROM booking WHERE date ='" + booking.getDate() + "'AND time ='" + booking.getTime() +  "';";
 			System.out.println("[SQL QUERY] " + query);
 			statement.executeUpdate(query);
 			statement.close();
