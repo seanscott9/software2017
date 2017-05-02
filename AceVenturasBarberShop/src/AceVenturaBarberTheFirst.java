@@ -53,7 +53,7 @@ public class AceVenturaBarberTheFirst extends JFrame implements ActionListener{
 	 * Login Frame and Buttons
 	 */
 	JPanel loginFrame;
-	JTextField pwd;
+	JPasswordField pwd;
 	JTextField usrName;
 	/**
 	 * Signup Frame and Buttons
@@ -267,7 +267,7 @@ public class AceVenturaBarberTheFirst extends JFrame implements ActionListener{
 		usrName = new JTextField(25);
 		JPanel pwdPanel = new JPanel();
 		JLabel pwdLabel = new JLabel("Password");
-		pwd = new JTextField(25);
+		pwd = new JPasswordField(25);
 		/**
 		 * Home Button
 		 */
@@ -871,8 +871,8 @@ public class AceVenturaBarberTheFirst extends JFrame implements ActionListener{
 			 * Calls the DBConnection LogIn and passes the variables
 			 */
 
-			System.out.println("Login: " + usrName.getText() + ", Password: " + pwd.getText());
-			user = DBConnection.logIn(usrName.getText(), pwd.getText());
+			System.out.println("Login: " + usrName.getText() + ", Password: " + new String(pwd.getPassword()));
+			user = DBConnection.logIn(usrName.getText(), new String(pwd.getPassword()));
 			
 			if(user != null) 
 			{
@@ -1120,7 +1120,7 @@ public class AceVenturaBarberTheFirst extends JFrame implements ActionListener{
 		 */
 		if(source == createAccountSubmitButton){
 
-//FIX!!!!
+
 			System.out.println("Create Account: " + adminAccCreateEmail.getText() + ", Password: " + new String(adminAccCreatePassTextArea.getPassword()) + ", Phone Number: " + adminCreatePhone.getText());
 			User user = new User(adminAccCreateEmail.getText(), new String(adminAccCreatePassTextArea.getPassword()), adminCreatePhone.getText());
 			DBConnection.setUser(user);
