@@ -892,10 +892,12 @@ public class AceVenturaBarberTheFirst extends JFrame implements ActionListener{
 				}
 				else if(isAdmin ==true)
 				{		
-						frame.remove(loginFrame);
-						frame.add(crudFrame);
-						repaint();
-						revalidate();
+						frame.setVisible(false);
+						//frame.remove(loginFrame);
+						//frame.add(crudFrame);
+						crudFrame.setVisible(true);
+						//repaint();
+						//revalidate();
 						isLogged = true;
 						usrName.setText("");
 						pwd.setText("");
